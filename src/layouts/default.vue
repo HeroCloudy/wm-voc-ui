@@ -5,7 +5,7 @@
   <el-container class="min-h-screen">
     <el-header class="header" height="60px">
       <wm-logo />
-      <div>登录</div>
+      <wm-user-info />
     </el-header>
     <el-main>
       <router-view></router-view>

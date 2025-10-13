@@ -5,7 +5,7 @@
  @time: 2025/10/13 13:45
 -->
 <template>
-  <el-link underline="never" class="logo" href="/">
+  <el-link underline="never" class="logo" @click="router.push(PATH_HOME)">
     <el-space>
       <wm-icon icon="ant-design:form-outlined" />
       <span>wumeng问卷</span>
@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  p?: string
-}>()
+import { PATH_HOME } from '@/router'
+
+const router = useRouter()
 </script>
 <style scoped lang="scss">
 .logo {

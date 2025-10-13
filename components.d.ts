@@ -21,5 +21,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     WmIcon: typeof import('./src/components/wm/icon/index.vue')['default']
     WmLogo: typeof import('./src/components/wm/logo/index.vue')['default']
+    WmUserInfo: typeof import('./src/components/wm/user-info/index.vue')['default']
   }
 }
