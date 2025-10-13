@@ -1,0 +1,23 @@
+@use "sass:color";
+
+$wm-color-primary: #1C9399;
+$wm-color-success: #42C3AF;
+$wm-color-danger: #FA675C;
+$wm-color-warning: #FFC15E;
+
+html:root {
+
+  @each $type, $color in (primary, $wm-color-primary), (success, $wm-color-success), (danger, $wm-color-danger), (warning, $wm-color-warning) {
+    // wumeng
+    --wm-color-#{$type}: #{$color};
+    // el
+    --el-color-#{$type}: #{$color};
+
+    @each $i in (1, 2, 3, 5, 7, 8, 9) {
+      // wumeng 颜色混合
+      --wm-color-#{$type}-light-#{$i}: #{color.mix(#fff, $color, $i * 10%)};
+      // el 颜色混合
+      --el-color-#{$type}-light-#{$i}: #{color.mix(#fff, $color, $i * 10%)};
+    }
+  }
+}
