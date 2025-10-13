@@ -11,7 +11,10 @@
   </div>
 
   <div>
-    <question-card v-for="item in questionList" :key="item.id" :data="item" />
+    <template v-if="questionList?.length">
+      <question-card v-for="item in questionList" :key="item.id" :data="item" />
+    </template>
+    <el-empty v-else />
   </div>
 
   <div class="my-6 text-center">Load more 上划加载更多</div>
