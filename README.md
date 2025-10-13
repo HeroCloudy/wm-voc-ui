@@ -12,9 +12,9 @@
   - 我的问卷 `/manage/list`
   - 星标问卷 `/manage/star`
   - 回收站 `/manage/trash`
-- 问卷详情 `/voc`
-  - 编辑问卷 `/voc/edit/:id`
-  - 问卷统计 `/voc/stat/:id`
+- 问卷详情 `/detail`
+  - 编辑问卷 `/detail/edit/:id`
+  - 问卷统计 `/detail/stat/:id`
 
 
 ## Recommended IDE Setup

@@ -1,8 +1,10 @@
 <!--
-  空布局
+ @name: detail.vue
+ @description:
+ @author: 程序员优雅哥 youyacoder
+ @time: 2025/10/13 10:41
 -->
 <template>
-  <div>默认空布局</div>
   <router-view></router-view>
 </template>
 

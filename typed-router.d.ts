@@ -19,7 +19,18 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
-    '/demo': RouteRecordInfo<'/demo', '/demo', Record<never, never>, Record<never, never>>,
+    '/404': RouteRecordInfo<'/404', '/404', Record<never, never>, Record<never, never>>,
+    '/detail': RouteRecordInfo<'/detail', '/detail', Record<never, never>, Record<never, never>, '/detail/edit' | '/detail/edit/[:id]' | '/detail/stat' | '/detail/stat/[:id]'>,
+    '/detail/edit': RouteRecordInfo<'/detail/edit', '/detail/edit', Record<never, never>, Record<never, never>, '/detail/edit/[:id]'>,
+    '/detail/edit/[:id]': RouteRecordInfo<'/detail/edit/[:id]', '/detail/edit/::id', { :id: ParamValue<true> }, { :id: ParamValue<false> }>,
+    '/detail/stat': RouteRecordInfo<'/detail/stat', '/detail/stat', Record<never, never>, Record<never, never>, '/detail/stat/[:id]'>,
+    '/detail/stat/[:id]': RouteRecordInfo<'/detail/stat/[:id]', '/detail/stat/::id', { :id: ParamValue<true> }, { :id: ParamValue<false> }>,
+    '/login': RouteRecordInfo<'/login', '/login', Record<never, never>, Record<never, never>>,
+    '/manage': RouteRecordInfo<'/manage', '/manage', Record<never, never>, Record<never, never>, '/manage/list' | '/manage/star' | '/manage/trash'>,
+    '/manage/list': RouteRecordInfo<'/manage/list', '/manage/list', Record<never, never>, Record<never, never>>,
+    '/manage/star': RouteRecordInfo<'/manage/star', '/manage/star', Record<never, never>, Record<never, never>>,
+    '/manage/trash': RouteRecordInfo<'/manage/trash', '/manage/trash', Record<never, never>, Record<never, never>>,
+    '/register': RouteRecordInfo<'/register', '/register', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -37,8 +48,52 @@ declare module 'vue-router/auto-routes' {
       routes: '/'
       views: never
     }
-    'src/pages/demo.vue': {
-      routes: '/demo'
+    'src/pages/404.vue': {
+      routes: '/404'
+      views: never
+    }
+    'src/pages/detail.vue': {
+      routes: '/detail' | '/detail/edit/[:id]' | '/detail/stat/[:id]' | '/detail/edit' | '/detail/stat'
+      views: 'default'
+    }
+    'src/pages/detail/edit.vue': {
+      routes: '/detail/edit' | '/detail/edit/[:id]'
+      views: 'default'
+    }
+    'src/pages/detail/edit/[:id].vue': {
+      routes: '/detail/edit/[:id]'
+      views: never
+    }
+    'src/pages/detail/stat.vue': {
+      routes: '/detail/stat' | '/detail/stat/[:id]'
+      views: 'default'
+    }
+    'src/pages/detail/stat/[:id].vue': {
+      routes: '/detail/stat/[:id]'
+      views: never
+    }
+    'src/pages/login.vue': {
+      routes: '/login'
+      views: never
+    }
+    'src/pages/manage.vue': {
+      routes: '/manage' | '/manage/list' | '/manage/star' | '/manage/trash'
+      views: 'default'
+    }
+    'src/pages/manage/list.vue': {
+      routes: '/manage/list'
+      views: never
+    }
+    'src/pages/manage/star.vue': {
+      routes: '/manage/star'
+      views: never
+    }
+    'src/pages/manage/trash.vue': {
+      routes: '/manage/trash'
+      views: never
+    }
+    'src/pages/register.vue': {
+      routes: '/register'
       views: never
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div>首页</div>
+  <div>register</div>
 </template>
 
 <script setup lang="ts"></script>
