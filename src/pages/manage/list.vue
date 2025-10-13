@@ -5,17 +5,38 @@
  @time: 2025/10/13 10:39
 -->
 <template>
-  <div class="list">
-    list
-    <p v-for="i in 100" :key="i">test {{ i }}</p>
+  <div class="header">
+    <div>我的问卷</div>
+    <div>（搜索）</div>
   </div>
+
+  <div class="list">
+    <question-card v-for="item in questionList" :key="item.id" :data="item" />
+  </div>
+
+  <div>Load more 上划加载更多</div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  p?: string
-}>()
+import QuestionCard from '@/pages/manage/components/question-card.vue'
+import type { QuestionType } from '@/types/types.ts'
+
+const questionList = ref<QuestionType[]>([])
+
+onMounted(() => {
+  for (let i = 1; i <= 5; i++) {
+    questionList.value.push({
+      id: `${i}`,
+      title: `测试问卷${i}`,
+      isStar: i % 2 === 0,
+      isPublished: i % 3 === 0,
+      answerCount: 20,
+      createdTime: '2019-02-01',
+    })
+  }
+})
 </script>
+
 <style scoped lang="scss">
 .list {
 }
