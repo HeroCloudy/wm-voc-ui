@@ -16,7 +16,9 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    VueRouter({}),
+    VueRouter({
+      exclude: ['./src/pages/**/components/**'],
+    }),
     // ⚠️ Vue must be placed after VueRouter()
     vue(),
     vueJsx(),
@@ -41,7 +43,7 @@ export default defineConfig({
     }),
     Components({
       deep: true,
-      directoryAsNamespace: false,
+      directoryAsNamespace: true,
       resolvers: [ElementPlusResolver()],
     }),
     vueDevTools(),
@@ -51,11 +53,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern',
-      },
-    },
-  },
+  // css: {
+  //   preprocessorOptions: {
+  // scss: {
+  // api: 'modern',
+  // },
+  //   },
+  // },
 })

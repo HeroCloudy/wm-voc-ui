@@ -5,12 +5,26 @@
  @time: 2025/10/13 10:39
 -->
 <template>
-  <div class="py-6 w-1200px mx-auto flex">
+  <div class="py-6 min-w-1200px w-80% mx-auto flex">
     <div class="w-120px">
-      <p><el-button>创建问卷</el-button></p>
-      <p><el-button>我的问卷</el-button></p>
-      <p><el-button>星标问卷</el-button></p>
-      <p><el-button>回收站</el-button></p>
+      <el-space direction="vertical" alignment="normal">
+        <el-button type="primary" size="large" class="mb-8">
+          <wm-icon icon="ant-design:plus-outlined" class="mr-1" />
+          新建问卷
+        </el-button>
+
+        <el-button
+          v-for="item in navBtnList"
+          :key="item.code"
+          type="default"
+          size="large"
+          :text="!isCurrent(item.code)"
+          @click="router.push(`/manage/${item.code}`)"
+        >
+          <wm-icon :icon="item.icon" class="mr-1" />
+          {{ item.title }}
+        </el-button>
+      </el-space>
     </div>
     <div class="flex-1 ml-60px">
       <router-view></router-view>
@@ -18,5 +32,16 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const router = useRouter()
+const route = useRoute()
+
+const navBtnList: { code: string; title: string; icon: string }[] = [
+  { code: 'list', title: '我的问卷', icon: 'ant-design:bars-outlined' },
+  { code: 'star', title: '星标问卷', icon: 'ant-design:star-outlined' },
+  { code: 'trash', title: '回收站', icon: 'ant-design:delete-outlined' },
+]
+
+const isCurrent = (code: string) => route.path === `/manage/${code}`
+</script>
 <style scoped lang="scss"></style>
