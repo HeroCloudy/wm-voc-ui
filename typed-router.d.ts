@@ -26,8 +26,7 @@ declare module 'vue-router/auto-routes' {
     '/detail/stat': RouteRecordInfo<'/detail/stat', '/detail/stat', Record<never, never>, Record<never, never>, '/detail/stat/[:id]'>,
     '/detail/stat/[:id]': RouteRecordInfo<'/detail/stat/[:id]', '/detail/stat/::id', { :id: ParamValue<true> }, { :id: ParamValue<false> }>,
     '/login': RouteRecordInfo<'/login', '/login', Record<never, never>, Record<never, never>>,
-    '/manage': RouteRecordInfo<'/manage', '/manage', Record<never, never>, Record<never, never>, '/manage/components/question-card' | '/manage/list' | '/manage/star' | '/manage/trash'>,
-    '/manage/components/question-card': RouteRecordInfo<'/manage/components/question-card', '/manage/components/question-card', Record<never, never>, Record<never, never>>,
+    '/manage': RouteRecordInfo<'/manage', '/manage', Record<never, never>, Record<never, never>, '/manage/list' | '/manage/star' | '/manage/trash'>,
     '/manage/list': RouteRecordInfo<'/manage/list', '/manage/list', Record<never, never>, Record<never, never>>,
     '/manage/star': RouteRecordInfo<'/manage/star', '/manage/star', Record<never, never>, Record<never, never>>,
     '/manage/trash': RouteRecordInfo<'/manage/trash', '/manage/trash', Record<never, never>, Record<never, never>>,
@@ -78,12 +77,8 @@ declare module 'vue-router/auto-routes' {
       views: never
     }
     'src/pages/manage.vue': {
-      routes: '/manage' | '/manage/components' | '/manage/list' | '/manage/components/question-card' | '/manage/star' | '/manage/trash'
+      routes: '/manage' | '/manage/list' | '/manage/star' | '/manage/trash'
       views: 'default'
-    }
-    'src/pages/manage/components/question-card.vue': {
-      routes: '/manage/components/question-card'
-      views: never
     }
     'src/pages/manage/list.vue': {
       routes: '/manage/list'

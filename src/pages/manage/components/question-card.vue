@@ -45,8 +45,22 @@
           <wm-icon icon="ant-design:star-outlined" class="mr-1" />
           {{ data.isStar ? '取消标星' : '标星' }}
         </el-button>
-        <el-button text> <wm-icon icon="ant-design:copy-outlined" class="mr-1" /> 复制 </el-button>
-        <el-button text>
+
+        <el-popconfirm
+          :title="`是否确定复制问卷【${data.title}】`"
+          confirm-button-text="确定复制"
+          width="300"
+          :hide-after="10"
+          @confirm="onCopy"
+        >
+          <template #reference>
+            <el-button text>
+              <wm-icon icon="ant-design:copy-outlined" class="mr-1" /> 复制
+            </el-button>
+          </template>
+        </el-popconfirm>
+
+        <el-button text @click="onDeleteBtnClick">
           <wm-icon icon="ant-design:delete-outlined" class="mr-1" /> 删除
         </el-button>
       </div>
@@ -56,12 +70,27 @@
 
 <script setup lang="ts">
 import type { QuestionType } from '@/types/types.ts'
+import { ElMessageBox } from 'element-plus'
 
-defineProps<{
+const props = defineProps<{
   data: QuestionType
 }>()
 
 const router = useRouter()
+
+const onCopy = () => {
+  console.log('confirm copy')
+}
+
+const onDeleteBtnClick = () => {
+  ElMessageBox.confirm(`是否确定删除问卷【${props.data.title}】`, '提醒', {
+    confirmButtonText: '确定删除',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    console.log('删除逻辑')
+  })
+}
 </script>
 <style scoped lang="scss">
 .question-card {
