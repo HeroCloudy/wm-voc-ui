@@ -2,8 +2,11 @@
   空布局
 -->
 <template>
-  <div>默认空布局</div>
-  <router-view></router-view>
+  <div>
+    <div>default layout header</div>
+    <router-view></router-view>
+    <div>default layout footer</div>
+  </div>
 </template>
 
 <script setup lang="ts"></script>
