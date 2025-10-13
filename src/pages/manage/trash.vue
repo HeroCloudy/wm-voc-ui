@@ -7,7 +7,9 @@
 <template>
   <div class="flex items-center justify-between mb-6">
     <div class="text-xl font-700">回收站</div>
-    <div>（搜索）</div>
+    <div>
+      <list-search />
+    </div>
   </div>
 
   <div>
@@ -44,6 +46,7 @@
 <script setup lang="ts">
 import type { QuestionType } from '@/types/types.ts'
 import { ElMessageBox } from 'element-plus'
+import ListSearch from '@/pages/manage/components/list-search.vue'
 
 const questionList = ref<QuestionType[]>([])
 
