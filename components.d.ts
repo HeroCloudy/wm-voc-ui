@@ -14,10 +14,12 @@ declare module 'vue' {
     ElDivider: typeof import('element-plus/es')['ElDivider']
     ElFooter: typeof import('element-plus/es')['ElFooter']
     ElHeader: typeof import('element-plus/es')['ElHeader']
+    ElLink: typeof import('element-plus/es')['ElLink']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElSpace: typeof import('element-plus/es')['ElSpace']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     WmIcon: typeof import('./src/components/wm/icon/index.vue')['default']
+    WmLogo: typeof import('./src/components/wm/logo/index.vue')['default']
   }
 }

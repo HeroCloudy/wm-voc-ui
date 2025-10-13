@@ -4,7 +4,7 @@
 <template>
   <el-container class="min-h-screen">
     <el-header class="header" height="60px">
-      <div>Logo</div>
+      <wm-logo />
       <div>登录</div>
     </el-header>
     <el-main>
