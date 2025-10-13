@@ -5,7 +5,10 @@
  @time: 2025/10/13 10:39
 -->
 <template>
-  <div class="list">list</div>
+  <div class="list">
+    list
+    <p v-for="i in 100" :key="i">test {{ i }}</p>
+  </div>
 </template>
 
 <script setup lang="ts">

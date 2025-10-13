@@ -7,6 +7,9 @@ $wm-color-warning: #FFC15E;
 
 html:root {
 
+  --bg-color: #F7F7F7;
+  --border-color: #E8E8E8;
+
   @each $type, $color in (primary, $wm-color-primary), (success, $wm-color-success), (danger, $wm-color-danger), (warning, $wm-color-warning) {
     // wumeng
     --wm-color-#{$type}: #{$color};
