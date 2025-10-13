@@ -6,7 +6,7 @@
 -->
 <template>
   <div class="flex items-center justify-between mb-6">
-    <div class="text-xl font-700">我的问卷</div>
+    <div class="text-xl font-700">星标问卷</div>
     <div>（搜索）</div>
   </div>
 
