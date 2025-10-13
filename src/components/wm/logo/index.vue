@@ -8,7 +8,7 @@
   <el-link underline="never" class="logo" @click="router.push(PATH_HOME)">
     <el-space>
       <wm-icon icon="ant-design:form-outlined" />
-      <span>wumeng问卷</span>
+      <span>问卷 DEMO</span>
     </el-space>
   </el-link>
 </template>
