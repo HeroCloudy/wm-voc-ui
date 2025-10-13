@@ -7,5 +7,20 @@
   <div>问卷编辑页面</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { getSurveyService } from '@/service/survey.ts'
+
+const router = useRouter()
+const route = useRoute()
+
+onMounted(async () => {
+  const id = (route.params?.id ?? '') as string
+  if (!id) {
+    router.back()
+  }
+  console.log('--- id', id)
+  const resp = await getSurveyService(id)
+  console.log(resp)
+})
+</script>
 <style scoped lang="scss"></style>
