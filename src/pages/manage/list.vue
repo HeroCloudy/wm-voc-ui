@@ -5,16 +5,16 @@
  @time: 2025/10/13 10:39
 -->
 <template>
-  <div class="header">
-    <div>我的问卷</div>
+  <div class="flex items-center justify-between mb-6">
+    <div class="text-xl font-700">我的问卷</div>
     <div>（搜索）</div>
   </div>
 
-  <div class="list">
+  <div>
     <question-card v-for="item in questionList" :key="item.id" :data="item" />
   </div>
 
-  <div>Load more 上划加载更多</div>
+  <div class="my-6 text-center">Load more 上划加载更多</div>
 </template>
 
 <script setup lang="ts">
