@@ -40,6 +40,7 @@
 
 <script setup lang="ts">
 import { createSurveyService } from '@/service/survey.ts'
+import { useRequest } from '@/hooks/use-request.ts'
 
 const router = useRouter()
 const route = useRoute()
@@ -52,18 +53,14 @@ const navBtnList: { code: string; title: string; icon: string }[] = [
 
 const isCurrent = (code: string) => route.path === `/manage/${code}`
 
-const loading = ref(false)
-
-const onCreateBtnClick = async () => {
-  loading.value = true
-  const resp = await createSurveyService()
-  loading.value = false
-  console.log(resp)
-  const { id } = (resp || {}) as any
-  if (id) {
-    ElMessage.success('问卷创建成功')
-    router.push(`/detail/edit/${id}`)
-  }
-}
+const { loading, run: onCreateBtnClick } = useRequest(createSurveyService, {
+  manual: true,
+  onSuccess: ({ id }) => {
+    if (id) {
+      ElMessage.success('问卷创建成功')
+      router.push(`/detail/edit/${id}`)
+    }
+  },
+})
 </script>
 <style scoped lang="scss"></style>

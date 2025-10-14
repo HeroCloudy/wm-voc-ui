@@ -6,7 +6,7 @@
 <template>
   <div>问卷编辑页面</div>
   <div>
-    {{ loading ? '加载中' : JSON.stringify(data, 2) }}
+    {{ loading ? '加载中' : JSON.stringify(data) }}
   </div>
 </template>
 

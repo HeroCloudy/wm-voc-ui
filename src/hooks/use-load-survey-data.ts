@@ -1,24 +1,19 @@
 import { getSurveyService } from '@/service/survey.ts'
 import { useRouteParam } from '@/hooks/use-route-param.ts'
+import { useRequest } from '@/hooks/use-request.ts'
 
 export function useLoadSurveyData() {
-  const loading = ref<boolean>(false)
-  const data = ref<Record<string, any>>()
   const router = useRouter()
 
-  onMounted(async () => {
-    const { id } = useRouteParam()
-    if (!id) {
-      router.back()
-    }
-    loading.value = true
-    const resp = await getSurveyService(id)
-    loading.value = false
-    data.value = resp
-  })
+  const { id } = useRouteParam()
+  if (!id) {
+    router.back()
+  }
+  const { loading, data, error } = useRequest(() => getSurveyService(id))
 
   return {
     data,
     loading,
+    error,
   }
 }
