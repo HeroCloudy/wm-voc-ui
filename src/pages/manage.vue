@@ -8,7 +8,13 @@
   <div class="py-6 min-w-1200px w-80% mx-auto flex">
     <div class="w-120px">
       <el-space direction="vertical" alignment="normal">
-        <el-button type="primary" size="large" class="mb-8">
+        <el-button
+          type="primary"
+          size="large"
+          class="mb-8"
+          @click="onCreateBtnClick"
+          :disabled="loading"
+        >
           <wm-icon icon="ant-design:plus-outlined" class="mr-1" />
           新建问卷
         </el-button>
@@ -33,6 +39,8 @@
 </template>
 
 <script setup lang="ts">
+import { createSurveyService } from '@/service/survey.ts'
+
 const router = useRouter()
 const route = useRoute()
 
@@ -43,5 +51,19 @@ const navBtnList: { code: string; title: string; icon: string }[] = [
 ]
 
 const isCurrent = (code: string) => route.path === `/manage/${code}`
+
+const loading = ref(false)
+
+const onCreateBtnClick = async () => {
+  loading.value = true
+  const resp = await createSurveyService()
+  loading.value = false
+  console.log(resp)
+  const { id } = (resp || {}) as any
+  if (id) {
+    ElMessage.success('问卷创建成功')
+    router.push(`/detail/edit/${id}`)
+  }
+}
 </script>
 <style scoped lang="scss"></style>

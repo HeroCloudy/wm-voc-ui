@@ -5,7 +5,14 @@
 -->
 <template>
   <div>问卷统计页面</div>
+  <div>
+    {{ loading ? '加载中' : JSON.stringify(data, 2) }}
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useLoadSurveyData } from '@/hooks/use-load-survey-data.ts'
+
+const { loading, data } = useLoadSurveyData()
+</script>
 <style scoped lang="scss"></style>
