@@ -27,4 +27,7 @@ declare module 'vue' {
     WmLogo: typeof import('./src/components/wm/logo/index.vue')['default']
     WmUserInfo: typeof import('./src/components/wm/user-info/index.vue')['default']
   }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

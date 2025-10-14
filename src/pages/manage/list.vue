@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div>
+  <div v-loading="loading">
     <template v-if="questionList?.length">
       <question-card v-for="item in questionList" :key="item.id" :data="item" />
     </template>
@@ -26,20 +26,29 @@
 import QuestionCard from '@/pages/manage/components/question-card.vue'
 import type { QuestionType } from '@/types/types.ts'
 import ListSearch from '@/pages/manage/components/list-search.vue'
+import { getSurveyListService } from '@/service/survey.ts'
+import { useRequest } from '@/hooks/use-request'
 
 const questionList = ref<QuestionType[]>([])
 
+const { data, loading } = useRequest(getSurveyListService)
+
+watchEffect(() => {
+  const { list = [], total } = data.value || []
+  questionList.value = list
+})
+
 onMounted(() => {
-  for (let i = 1; i <= 5; i++) {
-    questionList.value.push({
-      id: `${i}`,
-      title: `测试问卷${i}`,
-      isStar: i % 2 === 0,
-      isPublished: i % 3 === 0,
-      answerCount: 20,
-      createdTime: '2019-02-01',
-    })
-  }
+  // for (let i = 1; i <= 5; i++) {
+  //   questionList.value.push({
+  //     id: `${i}`,
+  //     title: `测试问卷${i}`,
+  //     isStar: i % 2 === 0,
+  //     isPublished: i % 3 === 0,
+  //     answerCount: 20,
+  //     createdTime: '2019-02-01',
+  //   })
+  // }
 })
 </script>
 
