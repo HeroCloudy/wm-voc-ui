@@ -41,7 +41,7 @@
     </el-table>
   </div>
 
-  <div class="my-6 text-right">分页</div>
+  <list-pagination class="my-6" :total="questionTotal" />
 </template>
 
 <script setup lang="ts">
@@ -49,14 +49,17 @@ import type { QuestionType } from '@/types/types.ts'
 import { ElMessageBox } from 'element-plus'
 import ListSearch from '@/pages/manage/components/list-search.vue'
 import { useLoadSurveyList } from '@/hooks/use-load-survey-list.ts'
+import ListPagination from '@/pages/manage/components/list-pagination.vue'
 
 const questionList = ref<QuestionType[]>([])
+const questionTotal = ref(0)
 
 const { data, loading } = useLoadSurveyList({ isDeleted: true })
 
 watchEffect(() => {
-  const { list = [] } = data.value || []
+  const { list = [], total = 0 } = data.value || []
   questionList.value = list
+  questionTotal.value = total
 })
 
 const selectedList = ref<QuestionType[]>([])

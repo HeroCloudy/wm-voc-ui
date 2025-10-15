@@ -19,7 +19,7 @@
     <el-empty v-else />
   </div>
 
-  <div class="my-6 text-right">分页</div>
+  <list-pagination class="my-6" :total="questionTotal" />
 </template>
 
 <script setup lang="ts">
@@ -27,29 +27,17 @@ import type { QuestionType } from '@/types/types.ts'
 import QuestionCard from '@/pages/manage/components/question-card.vue'
 import ListSearch from '@/pages/manage/components/list-search.vue'
 import { useLoadSurveyList } from '@/hooks/use-load-survey-list.ts'
+import ListPagination from '@/pages/manage/components/list-pagination.vue'
 
 const questionList = ref<QuestionType[]>([])
+const questionTotal = ref(0)
 
 const { data, loading } = useLoadSurveyList({ isStar: true })
 
 watchEffect(() => {
-  const { list = [] } = data.value || []
+  const { list = [], total = 0 } = data.value || {}
   questionList.value = list
+  questionTotal.value = total ?? 0
 })
-
-// onMounted(() => {
-// setTimeout(() => {
-//   for (let i = 1; i <= 5; i++) {
-//     questionList.value.push({
-//       id: `${i}`,
-//       title: `测试问卷${i}`,
-//       isStar: true,
-//       isPublished: i % 3 === 0,
-//       answerCount: 20,
-//       createdTime: '2019-02-01',
-//     })
-//   }
-// }, 2000)
-// })
 </script>
 <style scoped lang="scss"></style>
