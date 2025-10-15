@@ -6,7 +6,6 @@
 -->
 <template>
   <div class="editor-canvas">
-    {{ selectedId }}
     <div
       v-for="item in innerComponentList"
       :key="item.fe_id"
@@ -22,14 +21,8 @@
 
 <script setup lang="ts">
 import { useGetComponentList } from '@/hooks/use-get-component-list.ts'
-import WmVocTitle from '@/components/wm/voc/title/index.vue'
-import WmVocInput from '@/components/wm/voc/input/index.vue'
 import { type ComponentInfo, useEditorStore } from '@/stores/modules/editor.ts'
-
-const componentMap: Record<string, any> = {
-  title: WmVocTitle,
-  input: WmVocInput,
-}
+import { componentMap } from '@/constants/component-config.ts'
 
 const editorStore = useEditorStore()
 

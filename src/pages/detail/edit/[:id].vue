@@ -7,7 +7,9 @@
   <div class="edit-page">
     <div class="bg-white">Header</div>
     <div class="wrapper">
-      <div class="left">Left</div>
+      <div class="left">
+        <left-panel />
+      </div>
       <div class="main" @click="onPageClick">
         <div class="canvas-wrapper" v-loading="loading">
           <el-scrollbar min-height="100%">
@@ -24,6 +26,7 @@
 import EditorCanvas from './components/editor-canvas.vue'
 import { useLoadSurveyData } from '@/hooks/use-load-survey-data.ts'
 import { useEditorStore } from '@/stores/modules/editor.ts'
+import LeftPanel from '@/pages/detail/edit/components/left-panel.vue'
 
 const editorStore = useEditorStore()
 
