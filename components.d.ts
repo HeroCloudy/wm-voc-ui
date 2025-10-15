@@ -12,6 +12,7 @@ declare module 'vue' {
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElFooter: typeof import('element-plus/es')['ElFooter']
     ElHeader: typeof import('element-plus/es')['ElHeader']
+    ElInput: typeof import('element-plus/es')['ElInput']
     ElLink: typeof import('element-plus/es')['ElLink']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
@@ -21,5 +22,7 @@ declare module 'vue' {
     WmIcon: typeof import('./src/components/wm/icon/index.vue')['default']
     WmLogo: typeof import('./src/components/wm/logo/index.vue')['default']
     WmUserInfo: typeof import('./src/components/wm/user-info/index.vue')['default']
+    WmVocInput: typeof import('./src/components/wm/voc/input/index.vue')['default']
+    WmVocTitle: typeof import('./src/components/wm/voc/title/index.vue')['default']
   }
 }

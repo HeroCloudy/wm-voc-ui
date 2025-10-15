@@ -10,10 +10,8 @@
       <div class="left">Left</div>
       <div class="main">
         <div class="canvas-wrapper">
-          <el-scrollbar height="100%">
-            <div>画布 滚动</div>
-            <div class="h-1200px"></div>
-            <div>aa</div>
+          <el-scrollbar min-height="100%">
+            <editor-canvas />
           </el-scrollbar>
         </div>
       </div>
@@ -22,7 +20,9 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import EditorCanvas from './components/editor-canvas.vue'
+</script>
 <style scoped lang="scss">
 .edit-page {
   @apply flex flex-col h-screen bg-[#f0f2f5];
