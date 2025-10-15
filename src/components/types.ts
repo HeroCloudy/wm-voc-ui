@@ -9,4 +9,4 @@ export interface VocInputPropsType {
   placeholder?: string
 }
 
-export type VocComponentPropsType = VocTitlePropsType | VocInputPropsType
+export type VocComponentPropsType = VocTitlePropsType & VocInputPropsType

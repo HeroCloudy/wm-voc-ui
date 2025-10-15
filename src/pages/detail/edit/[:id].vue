@@ -9,9 +9,9 @@
     <div class="wrapper">
       <div class="left">Left</div>
       <div class="main">
-        <div class="canvas-wrapper">
+        <div class="canvas-wrapper" v-loading="loading">
           <el-scrollbar min-height="100%">
-            <editor-canvas :loading="loading" />
+            <editor-canvas />
           </el-scrollbar>
         </div>
       </div>

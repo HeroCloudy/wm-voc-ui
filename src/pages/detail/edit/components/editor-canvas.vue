@@ -5,8 +5,9 @@
  @time: 2025/10/15 17:17
 -->
 <template>
-  <div class="editor-canvas" v-loading="loading">
+  <div class="editor-canvas">
     <!-- 临时使用 -->
+    <!--
     <div class="component-wrapper">
       <div class="component">
         <wm-voc-title />
@@ -32,18 +33,32 @@
         <wm-voc-input />
       </div>
     </div>
-    <div class="component-wrapper">
+    -->
+    <div v-for="item in innerComponentList" :key="item.fe_id" class="component-wrapper">
       <div class="component">
-        <wm-voc-input title="你的名字" placeholder="请输入你的名字" />
+        <component :is="componentMap[item.type]" v-bind="item.props" />
+        <!--        <wm-voc-input title="你的名字" placeholder="请输入你的名字" />-->
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  loading?: boolean
-}>()
+import { useGetComponentList } from '@/hooks/use-get-component-list.ts'
+import WmVocTitle from '@/components/wm/voc/title/index.vue'
+import WmVocInput from '@/components/wm/voc/input/index.vue'
+import type { ComponentInfo } from '@/stores/modules/editor.ts'
+
+const componentMap: Record<string, any> = {
+  title: WmVocTitle,
+  input: WmVocInput,
+}
+
+const { componentList } = useGetComponentList()
+
+const innerComponentList = computed(() =>
+  componentList.value.filter((item: ComponentInfo) => item.type && componentMap[item.type]),
+)
 </script>
 <style scoped lang="scss">
 .editor-canvas {
