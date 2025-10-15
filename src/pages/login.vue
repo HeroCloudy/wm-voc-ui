@@ -37,7 +37,7 @@
         <el-checkbox v-model="form.rememberMe" label="记住我" size="large" />
       </el-form-item>
       <div class="text-center mt-5">
-        <el-button type="primary" @click="onSubmit">登 录</el-button>
+        <el-button type="primary" @click="onSubmit" :loading="loading">登 录</el-button>
         <el-button type="primary" link @click="router.push(PATH_REGISTER)">
           没有账户，注册账户
         </el-button>
@@ -47,8 +47,11 @@
 </template>
 
 <script setup lang="ts">
-import { PATH_REGISTER } from '@/router'
+import { PATH_MANAGE_INDEX, PATH_REGISTER } from '@/router'
 import type { FormInstance } from 'element-plus'
+import { useRequest } from '@/hooks/use-request.ts'
+import { loginService } from '@/service/user.ts'
+import { useCoreStore } from '@/stores/modules/core.ts'
 
 const router = useRouter()
 const form = ref<Record<string, any>>({
@@ -59,12 +62,22 @@ const form = ref<Record<string, any>>({
 
 const formRef = useTemplateRef<FormInstance>('formRef')
 
+const coreStore = useCoreStore()
+
 onMounted(() => {
   const { username, password } = getUserInfoFromStorage()
   if (username && password) {
     form.value.username = username
     form.value.password = password
   }
+})
+
+const { loading, run: onLogin } = useRequest(() => loginService(form.value), {
+  manual: true,
+  onSuccess(v) {
+    coreStore.setToken(v?.token ?? '')
+    router.push(PATH_MANAGE_INDEX)
+  },
 })
 
 const onSubmit = async () => {
@@ -80,6 +93,7 @@ const onSubmit = async () => {
   } else {
     forgetUser()
   }
+  onLogin()
 }
 
 const USERNAME_KEY = 'USERNAME'
