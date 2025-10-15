@@ -4,32 +4,52 @@
  @time: 2025/10/13 10:42
 -->
 <template>
-  <div>问卷编辑页面</div>
-  <div>
-    {{ loading ? '加载中' : JSON.stringify(data) }}
+  <div class="edit-page">
+    <div class="bg-white">Header</div>
+    <div class="wrapper">
+      <div class="left">Left</div>
+      <div class="main">
+        <div class="canvas-wrapper">
+          <el-scrollbar height="100%">
+            <div>画布 滚动</div>
+            <div class="h-1200px"></div>
+            <div>aa</div>
+          </el-scrollbar>
+        </div>
+      </div>
+      <div class="right">Right</div>
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { useLoadSurveyData } from '@/hooks/use-load-survey-data.ts'
+<script setup lang="ts"></script>
+<style scoped lang="scss">
+.edit-page {
+  @apply flex flex-col h-screen bg-[#f0f2f5];
 
-// const router = useRouter()
-// const route = useRoute()
+  .wrapper {
+    @apply flex-1 flex py-3 mx-6;
 
-// const loading = ref(false)
-// const data = ref<Record<string, any>>()
-//
-// onMounted(async () => {
-//   const id = (route.params?.id ?? '') as string
-//   if (!id) {
-//     router.back()
-//   }
-//   loading.value = true
-//   const resp = await getSurveyService(id)
-//   loading.value = false
-//   data.value = resp
-//   console.log(resp)
-// })
-const { loading, data } = useLoadSurveyData()
-</script>
-<style scoped lang="scss"></style>
+    .left {
+      @apply w-300px bg-white px-3 box-border;
+    }
+
+    .right {
+      @apply w-300px bg-white px-3  box-border;
+    }
+
+    .main {
+      @apply flex-1 overflow-hidden h-full;
+
+      .canvas-wrapper {
+        @apply absolute h-80vh top-50% left-50% bg-white;
+        transform: translateX(-50%) translateY(-50%);
+        box-shadow: 0 2px 2px #ccc;
+        max-width: calc(100% - 900px);
+        min-width: 400px;
+        width: 40%;
+      }
+    }
+  }
+}
+</style>
