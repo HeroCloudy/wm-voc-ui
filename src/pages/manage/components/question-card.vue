@@ -5,7 +5,7 @@
  @time: 2025/10/13 14:52
 -->
 <template>
-  <div class="question-card" v-loading="copyLoading">
+  <div class="question-card" v-loading="copyLoading || deleteLoading" v-if="!data.isDeleted">
     <div class="flex justify-between">
       <el-button
         type="primary"
@@ -87,6 +87,7 @@ const onDeleteBtnClick = () => {
     type: 'warning',
   }).then(() => {
     console.log('删除逻辑')
+    onDelete()
   })
 }
 
@@ -107,6 +108,18 @@ const { loading: copyLoading, run: onCopy } = useRequest(() => copySurveyService
     router.push(`/detail/edit/${v.id}`)
   },
 })
+
+const { loading: deleteLoading, run: onDelete } = useRequest(
+  () => updateSurveyService(props.data.id, { isDeleted: true }),
+  {
+    manual: true,
+    onSuccess: () => {
+      ElMessage.success('删除成功')
+      const data = props.data
+      data.isDeleted = !data.isDeleted
+    },
+  },
+)
 </script>
 <style scoped lang="scss">
 .question-card {

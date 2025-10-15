@@ -4,5 +4,6 @@ export interface QuestionType {
   isStar: boolean
   isPublished: boolean
   answerCount: number
+  isDeleted: boolean
   createdTime: string
 }
