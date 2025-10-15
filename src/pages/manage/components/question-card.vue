@@ -5,7 +5,7 @@
  @time: 2025/10/13 14:52
 -->
 <template>
-  <div class="question-card">
+  <div class="question-card" v-loading="copyLoading">
     <div class="flex justify-between">
       <el-button
         type="primary"
@@ -72,17 +72,13 @@
 import type { QuestionType } from '@/types/types.ts'
 import { ElMessageBox } from 'element-plus'
 import { useRequest } from '@/hooks/use-request.ts'
-import { updateSurveyService } from '@/service/survey.ts'
+import { copySurveyService, updateSurveyService } from '@/service/survey.ts'
 
 const props = defineProps<{
   data: QuestionType
 }>()
 
 const router = useRouter()
-
-const onCopy = () => {
-  console.log('confirm copy')
-}
 
 const onDeleteBtnClick = () => {
   ElMessageBox.confirm(`是否确定删除问卷【${props.data.title}】`, '提醒', {
@@ -99,10 +95,18 @@ const { loading: starLoading, run: onStarBtnClick } = useRequest(
   {
     manual: true,
     onSuccess: () => {
-      props.data.isStar = !props.data.isStar
+      const data = props.data
+      data.isStar = !data.isStar
     },
   },
 )
+
+const { loading: copyLoading, run: onCopy } = useRequest(() => copySurveyService(props.data.id), {
+  manual: true,
+  onSuccess(v: any) {
+    router.push(`/detail/edit/${v.id}`)
+  },
+})
 </script>
 <style scoped lang="scss">
 .question-card {
