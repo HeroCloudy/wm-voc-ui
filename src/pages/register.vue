@@ -57,7 +57,7 @@
         <el-input v-model="form.nickname" />
       </el-form-item>
       <div class="text-center mt-5">
-        <el-button type="primary" @click="onSubmit">注 册</el-button>
+        <el-button type="primary" @click="onSubmit" :loading="loading">注 册</el-button>
         <el-button type="primary" link @click="router.push(PATH_LOGIN)">已有账户，登录</el-button>
       </div>
     </el-form>
@@ -67,6 +67,8 @@
 <script setup lang="ts">
 import { PATH_LOGIN } from '@/router'
 import type { FormInstance } from 'element-plus'
+import { useRequest } from '@/hooks/use-request.ts'
+import { registerService } from '@/service/user.ts'
 
 const router = useRouter()
 const form = ref({
@@ -78,11 +80,21 @@ const form = ref({
 
 const formRef = useTemplateRef<FormInstance>('formRef')
 
+const { loading, run: onRegister } = useRequest(() => registerService(form.value), {
+  manual: true,
+  onSuccess(v) {
+    console.log(v)
+    ElMessage.success('注册成功')
+    router.push(PATH_LOGIN)
+  },
+})
+
 const onSubmit = async () => {
   const valid = await formRef.value?.validate()
   if (!valid) {
     return
   }
   console.log(form.value)
+  onRegister()
 }
 </script>
