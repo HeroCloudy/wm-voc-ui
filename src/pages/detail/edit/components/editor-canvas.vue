@@ -5,7 +5,7 @@
  @time: 2025/10/15 17:17
 -->
 <template>
-  <div class="editor-canvas">
+  <div class="editor-canvas" v-loading="loading">
     <!-- 临时使用 -->
     <div class="component-wrapper">
       <div class="component">
@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 defineProps<{
-  p?: string
+  loading?: boolean
 }>()
 </script>
 <style scoped lang="scss">

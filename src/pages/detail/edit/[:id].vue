@@ -11,7 +11,7 @@
       <div class="main">
         <div class="canvas-wrapper">
           <el-scrollbar min-height="100%">
-            <editor-canvas />
+            <editor-canvas :loading="loading" />
           </el-scrollbar>
         </div>
       </div>
@@ -22,6 +22,12 @@
 
 <script setup lang="ts">
 import EditorCanvas from './components/editor-canvas.vue'
+import { useLoadSurveyData } from '@/hooks/use-load-survey-data.ts'
+
+const { loading, data } = useLoadSurveyData()
+watchEffect(() => {
+  console.log(data.value)
+})
 </script>
 <style scoped lang="scss">
 .edit-page {

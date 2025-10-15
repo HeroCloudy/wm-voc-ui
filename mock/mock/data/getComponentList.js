@@ -16,7 +16,7 @@ function getComponentList() {
     // Title
     {
       fe_id: 'c2',
-      type: 'questionTitle', // 组件类型，不能重复，前后端统一好
+      type: 'title', // 组件类型，不能重复，前后端统一好
       title: '标题',
       isHidden: false,
       isLocked: false,
@@ -25,7 +25,7 @@ function getComponentList() {
     // Input
     {
       fe_id: 'c3',
-      type: 'questionInput',
+      type: 'input',
       title: '输入框1',
       isHidden: false,
       isLocked: false,
@@ -34,7 +34,7 @@ function getComponentList() {
     // Input
     {
       fe_id: 'c4',
-      type: 'questionInput',
+      type: 'input',
       title: '输入框2',
       isHidden: false,
       isLocked: false,

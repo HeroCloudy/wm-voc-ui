@@ -25,4 +25,7 @@ declare module 'vue' {
     WmVocInput: typeof import('./src/components/wm/voc/input/index.vue')['default']
     WmVocTitle: typeof import('./src/components/wm/voc/title/index.vue')['default']
   }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }
