@@ -35,5 +35,6 @@ export const useLoadSurveyList = (opt: { isStar?: boolean; isDeleted?: boolean }
     data,
     loading,
     error,
+    run,
   }
 }

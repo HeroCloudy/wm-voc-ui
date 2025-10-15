@@ -14,10 +14,22 @@
 
   <div>
     <div class="mb-4 text-right">
-      <el-button type="primary" :disabled="!selectedList?.length">恢复</el-button>
-      <el-button type="danger" :disabled="!selectedList?.length" @click="onDeleteBtnClick"
-        >彻底删除</el-button
+      <el-button
+        type="primary"
+        :disabled="!selectedList?.length"
+        :loading="recoveryLoading"
+        @click="onRecovery"
       >
+        恢复
+      </el-button>
+      <el-button
+        type="danger"
+        :disabled="!selectedList?.length"
+        @click="onDeleteBtnClick"
+        :loading="deleteLoading"
+      >
+        彻底删除
+      </el-button>
     </div>
     <el-table
       v-loading="loading"
@@ -50,11 +62,13 @@ import { ElMessageBox } from 'element-plus'
 import ListSearch from '@/pages/manage/components/list-search.vue'
 import { useLoadSurveyList } from '@/hooks/use-load-survey-list.ts'
 import ListPagination from '@/pages/manage/components/list-pagination.vue'
+import { useRequest } from '@/hooks/use-request.ts'
+import { deleteSurveyService, updateSurveyService } from '@/service/survey.ts'
 
 const questionList = ref<QuestionType[]>([])
 const questionTotal = ref(0)
 
-const { data, loading } = useLoadSurveyList({ isDeleted: true })
+const { data, loading, run: reload } = useLoadSurveyList({ isDeleted: true })
 
 watchEffect(() => {
   const { list = [], total = 0 } = data.value || []
@@ -78,8 +92,39 @@ const onDeleteBtnClick = () => {
       type: 'warning',
     },
   ).then(() => {
-    console.log('彻底删除')
+    onDelete()
   })
 }
+
+const { loading: recoveryLoading, run: onRecovery } = useRequest(
+  async () => {
+    const ids = selectedList.value.map((item) => item.id)
+    for await (const id of ids) {
+      await updateSurveyService(id, { isDeleted: false })
+    }
+    return true
+  },
+  {
+    manual: true,
+    onSuccess: () => {
+      ElMessage.success('恢复成功')
+      reload()
+    },
+  },
+)
+
+const { loading: deleteLoading, run: onDelete } = useRequest(
+  async () => {
+    const ids = selectedList.value.map((item) => item.id)
+    return deleteSurveyService(ids)
+  },
+  {
+    manual: true,
+    onSuccess: () => {
+      ElMessage.success('删除成功')
+      reload()
+    },
+  },
+)
 </script>
 <style scoped lang="scss"></style>

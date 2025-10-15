@@ -11,3 +11,8 @@ export const updateSurveyService = (id: string, data: Record<string, any>) =>
   instance.patch(`/api/survey/${id}`, data)
 
 export const copySurveyService = (id: string) => instance.post(`/api/survey/duplicate/${id}`, {})
+
+export const deleteSurveyService = (ids: string[]) =>
+  instance.delete(`/api/survey`, {
+    data: { id: ids },
+  })
