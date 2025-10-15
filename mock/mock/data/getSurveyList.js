@@ -15,7 +15,7 @@ function getSurveyList(opt = {}) {
       isPublished: Random.boolean(),
       isStar,
       answerCount: Random.natural(50, 100),
-      createAt: Random.datetime(),
+      createdTime: Random.datetime(),
       isDeleted, // 假删除
     })
   }

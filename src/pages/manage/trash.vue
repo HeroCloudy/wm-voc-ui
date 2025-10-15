@@ -20,6 +20,7 @@
       >
     </div>
     <el-table
+      v-loading="loading"
       border
       :data="questionList"
       size="large"
@@ -47,20 +48,15 @@
 import type { QuestionType } from '@/types/types.ts'
 import { ElMessageBox } from 'element-plus'
 import ListSearch from '@/pages/manage/components/list-search.vue'
+import { useLoadSurveyList } from '@/hooks/use-load-survey-list.ts'
 
 const questionList = ref<QuestionType[]>([])
 
-onMounted(() => {
-  for (let i = 1; i <= 10; i++) {
-    questionList.value.push({
-      id: `${i}`,
-      title: `测试问卷${i}`,
-      isStar: i % 2 === 0,
-      isPublished: i % 3 === 0,
-      answerCount: 20,
-      createdTime: '2019-02-01',
-    })
-  }
+const { data, loading } = useLoadSurveyList({ isDeleted: true })
+
+watchEffect(() => {
+  const { list = [] } = data.value || []
+  questionList.value = list
 })
 
 const selectedList = ref<QuestionType[]>([])

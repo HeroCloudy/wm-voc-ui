@@ -20,6 +20,8 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElSpace: typeof import('element-plus/es')['ElSpace']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
