@@ -8,7 +8,7 @@
     <div class="bg-white">Header</div>
     <div class="wrapper">
       <div class="left">Left</div>
-      <div class="main">
+      <div class="main" @click="onPageClick">
         <div class="canvas-wrapper" v-loading="loading">
           <el-scrollbar min-height="100%">
             <editor-canvas />
@@ -23,11 +23,18 @@
 <script setup lang="ts">
 import EditorCanvas from './components/editor-canvas.vue'
 import { useLoadSurveyData } from '@/hooks/use-load-survey-data.ts'
+import { useEditorStore } from '@/stores/modules/editor.ts'
 
-const { loading, data } = useLoadSurveyData()
-watchEffect(() => {
-  console.log(data.value)
-})
+const editorStore = useEditorStore()
+
+const { loading } = useLoadSurveyData()
+// watchEffect(() => {
+//   console.log(data.value)
+// })
+
+const onPageClick = () => {
+  editorStore.setSelectedId('')
+}
 </script>
 <style scoped lang="scss">
 .edit-page {
