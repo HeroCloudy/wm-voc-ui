@@ -6,3 +6,6 @@ export const createSurveyService = () => instance.post(`/api/survey`, {})
 
 export const getSurveyListService = (params: Record<string, any> = {}) =>
   instance.get(`/api/survey`, { params })
+
+export const updateSurveyService = (id: string, data: Record<string, any>) =>
+  instance.patch(`/api/survey/${id}`, data)

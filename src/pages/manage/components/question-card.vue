@@ -41,7 +41,7 @@
         </el-button>
       </div>
       <div>
-        <el-button text>
+        <el-button text @click="onStarBtnClick" v-loading="starLoading">
           <wm-icon icon="ant-design:star-outlined" class="mr-1" />
           {{ data.isStar ? '取消标星' : '标星' }}
         </el-button>
@@ -71,6 +71,8 @@
 <script setup lang="ts">
 import type { QuestionType } from '@/types/types.ts'
 import { ElMessageBox } from 'element-plus'
+import { useRequest } from '@/hooks/use-request.ts'
+import { updateSurveyService } from '@/service/survey.ts'
 
 const props = defineProps<{
   data: QuestionType
@@ -91,6 +93,16 @@ const onDeleteBtnClick = () => {
     console.log('删除逻辑')
   })
 }
+
+const { loading: starLoading, run: onStarBtnClick } = useRequest(
+  () => updateSurveyService(props.data.id, { isStar: !props.data.isStar }),
+  {
+    manual: true,
+    onSuccess: () => {
+      props.data.isStar = !props.data.isStar
+    },
+  },
+)
 </script>
 <style scoped lang="scss">
 .question-card {
