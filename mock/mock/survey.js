@@ -55,7 +55,7 @@ export default [
         errno: 0,
         data: {
           list: getSurveyList({ len: pageSize, isDeleted, isStar }), // 当前页
-          total: 100, // 总数，用于分页
+          total: 23, // 总数，用于分页
         },
       }
     },
