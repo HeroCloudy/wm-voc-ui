@@ -8,6 +8,12 @@
   <router-view></router-view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePage({
+  meta: {
+    layout: 'blank',
+  },
+})
+</script>
 
 <style scoped lang="scss"></style>
