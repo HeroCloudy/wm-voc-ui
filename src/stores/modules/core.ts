@@ -1,13 +1,28 @@
+import { getUserInfoService } from '@/service/user.ts'
+
 export const useCoreStore = defineStore(
   'coreStore',
   () => {
     const token = ref('')
+    const userInfo = ref<Record<string, any>>()
 
-    const setToken = (value: string) => {
+    const setToken = async (value: string) => {
       token.value = value
+
+      if (value) {
+        const resp = await getUserInfoService()
+        userInfo.value = resp || undefined
+      } else {
+        userInfo.value = undefined
+      }
     }
 
-    return { token, setToken }
+    const logout = () => {
+      token.value = ''
+      userInfo.value = undefined
+    }
+
+    return { token, setToken, userInfo, logout }
   },
   {
     persist: {

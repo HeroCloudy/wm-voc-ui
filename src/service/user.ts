@@ -5,3 +5,5 @@ export const registerService = (userInfo: Record<string, any>) =>
 
 export const loginService = (userInfo: Record<string, any>) =>
   instance.post('/api/user/login', userInfo)
+
+export const getUserInfoService = () => instance.get('/api/user/info')
