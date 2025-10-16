@@ -27,6 +27,7 @@
 import { useGetComponent } from '@/hooks/use-get-component.ts'
 import { type ComponentInfo, useEditorStore } from '@/stores/modules/editor.ts'
 import { getComponent } from '@/constants/component-config.ts'
+import { useBindCanvasKey } from '@/hooks/use-bind-canvas-key.ts'
 
 const editorStore = useEditorStore()
 
@@ -45,6 +46,8 @@ const innerComponentList = computed(() =>
 const onItemClick = (info: ComponentInfo) => {
   editorStore.setCurrentSelect(info)
 }
+
+useBindCanvasKey()
 </script>
 <style scoped lang="scss">
 .editor-canvas {

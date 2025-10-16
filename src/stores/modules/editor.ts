@@ -118,6 +118,22 @@ export const useEditorStore = defineStore('editorStore', () => {
     addComponent(newComponent)
   }
 
+  const selectPrevComponent = () => {
+    const index = getSelectedIndex()
+    if (index <= 0) {
+      return
+    }
+    selectedId.value = componentList.value[index - 1]!.fe_id
+  }
+
+  const selectNextComponent = () => {
+    const index = getSelectedIndex()
+    if (index >= componentList.value.length - 1) {
+      return
+    }
+    selectedId.value = componentList.value[index + 1]!.fe_id
+  }
+
   return {
     componentList,
     setComponentList,
@@ -134,5 +150,7 @@ export const useEditorStore = defineStore('editorStore', () => {
 
     copiedComponent,
     pasteComponent,
+    selectPrevComponent,
+    selectNextComponent,
   }
 })
