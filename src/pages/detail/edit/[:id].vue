@@ -5,7 +5,7 @@
 -->
 <template>
   <div class="edit-page">
-    <div class="bg-white">Header</div>
+    <editor-header />
 
     <div class="wrapper">
       <div class="left">
@@ -33,6 +33,7 @@ import { useLoadSurveyData } from '@/hooks/use-load-survey-data.ts'
 import { useEditorStore } from '@/stores/modules/editor.ts'
 import LeftPanel from '@/pages/detail/edit/components/left-panel.vue'
 import RightPanel from '@/pages/detail/edit/components/right-panel.vue'
+import EditorHeader from '@/pages/detail/edit/components/editor-header.vue'
 
 const editorStore = useEditorStore()
 
