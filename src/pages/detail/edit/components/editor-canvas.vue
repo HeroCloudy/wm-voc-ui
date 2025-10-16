@@ -9,7 +9,11 @@
     <div
       v-for="item in innerComponentList"
       :key="item.fe_id"
-      :class="['component-wrapper', selectedId === item.fe_id ? 'selected' : '']"
+      :class="[
+        'component-wrapper',
+        selectedId === item.fe_id ? 'selected' : '',
+        item.isLocked ? 'locked' : '',
+      ]"
       @click.stop="onItemClick(item)"
     >
       <div class="component">
@@ -59,6 +63,11 @@ const onItemClick = (info: ComponentInfo) => {
 
     &.selected {
       border-color: var(--wm-color-primary) !important;
+    }
+
+    &.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
 }

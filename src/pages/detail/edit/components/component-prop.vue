@@ -6,7 +6,12 @@
 -->
 <template>
   <div class="component-prop" v-if="selectedComponent">
-    <component :is="config?.propComponent" v-bind="selectedComponent.props" @change="onChange" />
+    <component
+      :is="config?.propComponent"
+      v-bind="selectedComponent.props"
+      @change="onChange"
+      :disabled="selectedComponent.isLocked || selectedComponent.isHidden"
+    />
   </div>
   <div v-else>未选中任何组件</div>
 </template>

@@ -21,6 +21,17 @@
         <wm-icon icon="ant-design:eye-invisible-outlined" />
       </el-button>
     </el-tooltip>
+
+    <el-tooltip content="锁定" placement="bottom" effect="light">
+      <el-button
+        circle
+        @click="editorStore.toggleComponentLock(selectedId)"
+        :disabled="!selectedId"
+        :type="selectedComponent?.isLocked ? 'primary' : 'default'"
+      >
+        <wm-icon icon="ant-design:lock-outlined" />
+      </el-button>
+    </el-tooltip>
   </div>
 </template>
 
@@ -29,6 +40,6 @@ import { useEditorStore } from '@/stores/modules/editor.ts'
 import { useGetComponent } from '@/hooks/use-get-component.ts'
 
 const editorStore = useEditorStore()
-const { selectedId } = useGetComponent()
+const { selectedId, selectedComponent } = useGetComponent()
 </script>
 <style scoped lang="scss"></style>

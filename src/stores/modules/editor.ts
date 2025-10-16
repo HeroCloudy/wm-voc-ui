@@ -7,6 +7,7 @@ export interface ComponentInfo {
   type: string
   title: string
   isHidden?: boolean
+  isLocked?: boolean
   props?: VocComponentPropsType
 }
 
@@ -89,6 +90,13 @@ export const useEditorStore = defineStore('editorStore', () => {
     }
   }
 
+  const toggleComponentLock = (id: string) => {
+    const target = componentList.value.find((item) => item.fe_id === id)
+    if (target) {
+      target.isLocked = !target.isLocked
+    }
+  }
+
   return {
     componentList,
     setComponentList,
@@ -96,6 +104,7 @@ export const useEditorStore = defineStore('editorStore', () => {
     updateComponentProp,
     removeComponent,
     updateComponentHidden,
+    toggleComponentLock,
 
     selectedId,
     selectedComponent,
