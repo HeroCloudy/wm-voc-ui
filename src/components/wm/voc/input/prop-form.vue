@@ -18,11 +18,34 @@
 
 <script setup lang="ts">
 import { RULES } from '@/constants/rules.ts'
-import { defaultProps, type VocInputPropsType } from './config.ts'
+import { type VocInputPropsType } from './config.ts'
 
-const props = withDefaults(defineProps<VocInputPropsType>(), defaultProps)
+const props = defineProps<VocInputPropsType>()
+const emits = defineEmits<{
+  change: [value: VocInputPropsType]
+}>()
 
-const form = ref(props)
+const form = ref({ ...props })
+
+watch(
+  () => form.value,
+  () => {
+    emits('change', form.value)
+  },
+  {
+    deep: true,
+  },
+)
+
+watch(
+  props,
+  () => {
+    form.value = { ...props }
+  },
+  {
+    deep: true,
+  },
+)
 </script>
 
 <style scoped lang="scss"></style>

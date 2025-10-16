@@ -30,7 +30,7 @@ const onItemClick = (item: ComponentConfig) => {
     fe_id: `${new Date().getTime()}`,
     title,
     type,
-    props: defaultProps,
+    props: { ...defaultProps },
   }
   editorStore.addComponent(newComponent)
 }

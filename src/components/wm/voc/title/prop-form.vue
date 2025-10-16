@@ -26,8 +26,28 @@ import { RULES } from '@/constants/rules.ts'
 import type { VocTitlePropsType } from './config.ts'
 
 const props = defineProps<VocTitlePropsType>()
+const emits = defineEmits<{
+  change: [value: VocTitlePropsType]
+}>()
 
-const form = ref(props)
+const form = ref({ ...props })
+watch(
+  form,
+  () => {
+    emits('change', form.value)
+  },
+  {
+    deep: true,
+  },
+)
+
+watch(
+  props,
+  () => {
+    form.value = { ...props }
+  },
+  { deep: true },
+)
 </script>
 <style scoped lang="scss">
 .prop-form {

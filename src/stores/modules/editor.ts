@@ -16,7 +16,9 @@ export const useEditorStore = defineStore('editorStore', () => {
   const selectedId = ref<string>('')
 
   /** 当前选中的组件 */
-  const selectedComponent = ref<ComponentInfo>()
+  const selectedComponent = computed(() =>
+    componentList.value.find((item) => item.fe_id === selectedId.value),
+  )
 
   const setComponentList = (list: ComponentInfo[]) => {
     componentList.value = list.filter((item) => !!getComponentConfig(item.type))
@@ -28,10 +30,8 @@ export const useEditorStore = defineStore('editorStore', () => {
 
   const setCurrentSelect = (info?: ComponentInfo) => {
     if (info) {
-      selectedComponent.value = info
       selectedId.value = info.fe_id
     } else {
-      selectedComponent.value = undefined
       selectedId.value = ''
     }
   }
@@ -48,10 +48,18 @@ export const useEditorStore = defineStore('editorStore', () => {
     setCurrentSelect(newComponent)
   }
 
+  const updateComponentProp = (value: VocComponentPropsType) => {
+    const target = componentList.value.find((item) => item.fe_id === selectedId.value)
+    if (target) {
+      target.props = value
+    }
+  }
+
   return {
     componentList,
     setComponentList,
     addComponent,
+    updateComponentProp,
 
     selectedId,
     selectedComponent,
