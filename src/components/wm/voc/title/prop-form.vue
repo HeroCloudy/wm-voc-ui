@@ -24,32 +24,33 @@
 <script setup lang="ts">
 import { RULES } from '@/constants/rules.ts'
 import type { VocTitlePropsType } from './config.ts'
+import { usePropForm } from '@/hooks/use-prop-form.ts'
 
 const props = defineProps<VocTitlePropsType>()
+
 const emits = defineEmits<{
   change: [value: VocTitlePropsType]
 }>()
 
-const form = ref({ ...props })
-watch(
-  form,
-  () => {
-    emits('change', form.value)
-  },
-  {
-    deep: true,
-  },
-)
+const { form } = usePropForm(props, emits)
 
-watch(
-  props,
-  () => {
-    form.value = { ...props }
-  },
-  { deep: true },
-)
+// const form = ref({ ...props })
+// watch(
+//   form,
+//   () => {
+//     emits('change', form.value)
+//   },
+//   {
+//     deep: true,
+//   },
+// )
+//
+// watch(
+//   props,
+//   () => {
+//     form.value = { ...props }
+//   },
+//   { deep: true },
+// )
 </script>
-<style scoped lang="scss">
-.prop-form {
-}
-</style>
+<style scoped lang="scss"></style>
