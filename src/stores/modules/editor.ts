@@ -1,10 +1,12 @@
 import type { VocComponentPropsType } from '@/components/types.ts'
-import { getComponent, getComponentConfig } from '@/constants/component-config.ts'
+import { getComponentConfig } from '@/constants/component-config.ts'
+import { getNextSelectedId } from '@/utils'
 
 export interface ComponentInfo {
   fe_id: string
   type: string
   title: string
+  isHidden?: boolean
   props?: VocComponentPropsType
 }
 
@@ -56,12 +58,28 @@ export const useEditorStore = defineStore('editorStore', () => {
       return
     }
 
-    // 计算删除后要选中的id
-    const newIndex = index === componentList.value.length - 1 ? index - 1 : index + 1
-    const newSelectedId = componentList.value[newIndex]?.fe_id ?? ''
+    const newSelectedId = getNextSelectedId(index, componentList.value)
 
     componentList.value.splice(index, 1)
     selectedId.value = newSelectedId
+  }
+
+  const updateComponentHidden = (id: string, isHidden: boolean) => {
+    const index = componentList.value.findIndex((c) => c.fe_id === id)
+    if (index < 0) {
+      return
+    }
+
+    const newSelectedId = getNextSelectedId(
+      index,
+      componentList.value.filter((c) => !c.isHidden),
+    )
+    componentList.value[index]!.isHidden = isHidden
+    if (isHidden) {
+      selectedId.value = newSelectedId
+    } else {
+      selectedId.value = id
+    }
   }
 
   const updateComponentProp = (value: VocComponentPropsType) => {
@@ -77,6 +95,7 @@ export const useEditorStore = defineStore('editorStore', () => {
     addComponent,
     updateComponentProp,
     removeComponent,
+    updateComponentHidden,
 
     selectedId,
     selectedComponent,

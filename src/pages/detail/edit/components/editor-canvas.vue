@@ -35,7 +35,7 @@ const innerComponentList = computed(() =>
       ...item,
       c: getComponent(item.type),
     }))
-    .filter((item) => !!item.c),
+    .filter((item) => !!item.c && !item.isHidden),
 )
 
 const onItemClick = (info: ComponentInfo) => {

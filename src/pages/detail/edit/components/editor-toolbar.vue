@@ -7,8 +7,18 @@
 <template>
   <div class="editor-toolbar">
     <el-tooltip content="删除" placement="bottom" effect="light">
-      <el-button circle @click="onDeleteBtnClick" :disabled="!selectedId">
+      <el-button circle @click="editorStore.removeComponent()" :disabled="!selectedId">
         <wm-icon icon="ant-design:delete-outlined" />
+      </el-button>
+    </el-tooltip>
+
+    <el-tooltip content="隐藏" placement="bottom" effect="light">
+      <el-button
+        circle
+        @click="editorStore.updateComponentHidden(selectedId, true)"
+        :disabled="!selectedId"
+      >
+        <wm-icon icon="ant-design:eye-invisible-outlined" />
       </el-button>
     </el-tooltip>
   </div>
@@ -20,12 +30,5 @@ import { useGetComponent } from '@/hooks/use-get-component.ts'
 
 const editorStore = useEditorStore()
 const { selectedId } = useGetComponent()
-
-const onDeleteBtnClick = () => {
-  editorStore.removeComponent()
-}
 </script>
-<style scoped lang="scss">
-.editor-toolbar {
-}
-</style>
+<style scoped lang="scss"></style>
