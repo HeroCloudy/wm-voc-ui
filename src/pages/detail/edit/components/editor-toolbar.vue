@@ -22,7 +22,11 @@
       </el-button>
     </el-tooltip>
 
-    <el-tooltip content="锁定" placement="bottom" effect="light">
+    <el-tooltip
+      :content="selectedComponent?.isLocked ? '解锁' : '锁定'"
+      placement="bottom"
+      effect="light"
+    >
       <el-button
         circle
         @click="editorStore.toggleComponentLock(selectedId)"
@@ -30,6 +34,22 @@
         :type="selectedComponent?.isLocked ? 'primary' : 'default'"
       >
         <wm-icon icon="ant-design:lock-outlined" />
+      </el-button>
+    </el-tooltip>
+
+    <el-tooltip content="复制" placement="bottom" effect="light">
+      <el-button circle @click="editorStore.copySelectedComponent()" :disabled="!selectedId">
+        <wm-icon icon="ant-design:copy-outlined" />
+      </el-button>
+    </el-tooltip>
+
+    <el-tooltip content="粘贴" placement="bottom" effect="light">
+      <el-button
+        circle
+        @click="editorStore.pasteComponent()"
+        :disabled="!editorStore.copiedComponent"
+      >
+        <wm-icon icon="ant-design:block-outlined" />
       </el-button>
     </el-tooltip>
   </div>

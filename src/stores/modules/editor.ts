@@ -1,6 +1,7 @@
 import type { VocComponentPropsType } from '@/components/types.ts'
 import { getComponentConfig } from '@/constants/component-config.ts'
 import { getNextSelectedId } from '@/utils'
+import { cloneDeep } from 'lodash-es'
 
 export interface ComponentInfo {
   fe_id: string
@@ -18,12 +19,15 @@ export const useEditorStore = defineStore('editorStore', () => {
   /** 当前选中的组件id */
   const selectedId = ref<string>('')
 
+  const copiedComponent = ref<ComponentInfo>()
+
   /** 当前选中的组件 */
   const selectedComponent = computed(() =>
     componentList.value.find((item) => item.fe_id === selectedId.value),
   )
 
   const setComponentList = (list: ComponentInfo[]) => {
+    copiedComponent.value = undefined
     componentList.value = list.filter((item) => !!getComponentConfig(item.type))
 
     if (componentList.value?.length) {
@@ -97,6 +101,23 @@ export const useEditorStore = defineStore('editorStore', () => {
     }
   }
 
+  const copySelectedComponent = () => {
+    if (selectedComponent.value) {
+      copiedComponent.value = cloneDeep(selectedComponent.value)
+    }
+  }
+
+  const pasteComponent = () => {
+    if (!copiedComponent.value) {
+      return
+    }
+    const newComponent = {
+      ...copiedComponent.value,
+      fe_id: `${new Date().getTime()}`,
+    }
+    addComponent(newComponent)
+  }
+
   return {
     componentList,
     setComponentList,
@@ -105,9 +126,13 @@ export const useEditorStore = defineStore('editorStore', () => {
     removeComponent,
     updateComponentHidden,
     toggleComponentLock,
+    copySelectedComponent,
 
     selectedId,
     selectedComponent,
     setCurrentSelect,
+
+    copiedComponent,
+    pasteComponent,
   }
 })
