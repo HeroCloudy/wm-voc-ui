@@ -36,16 +36,32 @@ export const useEditorStore = defineStore('editorStore', () => {
     }
   }
 
+  const getSelectedIndex = () => componentList.value.findIndex((c) => c.fe_id === selectedId.value)
+
   const addComponent = (data: ComponentInfo) => {
     const newComponent = { ...data }
 
-    const index = componentList.value.findIndex((c) => c.fe_id === selectedId.value)
+    const index = getSelectedIndex()
     if (index >= 0) {
       componentList.value.splice(index + 1, 0, newComponent)
     } else {
       componentList.value.push(newComponent)
     }
     setCurrentSelect(newComponent)
+  }
+
+  const removeComponent = () => {
+    const index = getSelectedIndex()
+    if (index < 0) {
+      return
+    }
+
+    // 计算删除后要选中的id
+    const newIndex = index === componentList.value.length - 1 ? index - 1 : index + 1
+    const newSelectedId = componentList.value[newIndex]?.fe_id ?? ''
+
+    componentList.value.splice(index, 1)
+    selectedId.value = newSelectedId
   }
 
   const updateComponentProp = (value: VocComponentPropsType) => {
@@ -60,6 +76,7 @@ export const useEditorStore = defineStore('editorStore', () => {
     setComponentList,
     addComponent,
     updateComponentProp,
+    removeComponent,
 
     selectedId,
     selectedComponent,

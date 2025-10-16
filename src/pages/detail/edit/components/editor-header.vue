@@ -15,7 +15,11 @@
 
         <div class="title">问卷标题</div>
       </div>
-      <div class="main">center</div>
+
+      <div class="main">
+        <editor-toolbar />
+      </div>
+
       <div class="right">
         <el-button>保存</el-button>
         <el-button type="primary">发布</el-button>
@@ -25,6 +29,8 @@
 </template>
 
 <script setup lang="ts">
+import EditorToolbar from '@/pages/detail/edit/components/editor-toolbar.vue'
+
 const router = useRouter()
 </script>
 <style scoped lang="scss">
