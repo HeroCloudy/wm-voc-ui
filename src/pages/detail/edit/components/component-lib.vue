@@ -8,9 +8,9 @@
   <div class="component-lib">
     <div v-for="(item, index) in componentGroup" :key="index" class="mb-4">
       <div class="title">{{ item.groupName }}</div>
-      <div v-for="(c, i) in item.components" :key="i" class="wrapper">
-        <div class="component">
-          <component :is="c" />
+      <div v-for="(c, i) in item.components" :key="i" class="wrapper" @click="onItemClick(c)">
+        <div class="pointer-events-none">
+          <component :is="c.component" />
         </div>
       </div>
     </div>
@@ -19,6 +19,20 @@
 
 <script setup lang="ts">
 import { componentGroup } from '@/constants/component-config.ts'
+import type { ComponentExportType } from '@/components/types.ts'
+import { type ComponentInfo, useEditorStore } from '@/stores/modules/editor.ts'
+
+const editorStore = useEditorStore()
+
+const onItemClick = (item: ComponentExportType) => {
+  const { title, type } = item
+  const newComponent: ComponentInfo = {
+    fe_id: `${new Date().getTime()}`,
+    title,
+    type,
+  }
+  editorStore.addComponent(newComponent)
+}
 </script>
 <style scoped lang="scss">
 .component-lib {
@@ -32,10 +46,6 @@ import { componentGroup } from '@/constants/component-config.ts'
 
     &:hover {
       @apply bg-gray-1;
-    }
-
-    .component {
-      @apply pointer-events-none;
     }
   }
 }

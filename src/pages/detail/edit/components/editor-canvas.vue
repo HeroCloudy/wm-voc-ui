@@ -13,7 +13,7 @@
       @click.stop="onItemClick(item.fe_id)"
     >
       <div class="component">
-        <component :is="componentMap[item.type]" v-bind="item.props" />
+        <component :is="item.c" v-bind="item.props" />
       </div>
     </div>
   </div>
@@ -21,8 +21,8 @@
 
 <script setup lang="ts">
 import { useGetComponentList } from '@/hooks/use-get-component-list.ts'
-import { type ComponentInfo, useEditorStore } from '@/stores/modules/editor.ts'
-import { componentMap } from '@/constants/component-config.ts'
+import { useEditorStore } from '@/stores/modules/editor.ts'
+import { getComponent } from '@/constants/component-config.ts'
 
 const editorStore = useEditorStore()
 
@@ -30,7 +30,12 @@ const { componentList } = useGetComponentList()
 const selectedId = computed(() => editorStore.selectedId)
 
 const innerComponentList = computed(() =>
-  componentList.value.filter((item: ComponentInfo) => item.type && componentMap[item.type]),
+  componentList.value
+    .map((item) => ({
+      ...item,
+      c: getComponent(item.type),
+    }))
+    .filter((item) => !!item.c),
 )
 
 const onItemClick = (id: string) => {

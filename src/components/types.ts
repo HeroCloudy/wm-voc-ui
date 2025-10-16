@@ -1,3 +1,9 @@
+export interface ComponentExportType {
+  type: string
+  title: string
+  component: Component
+}
+
 export interface VocTitlePropsType {
   text?: string
   level?: 1 | 2 | 3
