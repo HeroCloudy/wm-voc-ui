@@ -1,5 +1,5 @@
 import type { VocComponentPropsType } from '@/components/types.ts'
-import { getComponent } from '@/constants/component-config.ts'
+import { getComponent, getComponentConfig } from '@/constants/component-config.ts'
 
 export interface ComponentInfo {
   fe_id: string
@@ -15,16 +15,25 @@ export const useEditorStore = defineStore('editorStore', () => {
   /** 当前选中的组件id */
   const selectedId = ref<string>('')
 
-  const setComponentList = (list: ComponentInfo[]) => {
-    componentList.value = list.filter((item) => getComponent(item.type))
+  /** 当前选中的组件 */
+  const selectedComponent = ref<ComponentInfo>()
 
-    if (list?.length) {
-      setSelectedId(list[0]?.fe_id ?? '')
+  const setComponentList = (list: ComponentInfo[]) => {
+    componentList.value = list.filter((item) => !!getComponentConfig(item.type))
+
+    if (componentList.value?.length) {
+      setCurrentSelect(componentList.value[0])
     }
   }
 
-  const setSelectedId = (id: string) => {
-    selectedId.value = id
+  const setCurrentSelect = (info?: ComponentInfo) => {
+    if (info) {
+      selectedComponent.value = info
+      selectedId.value = info.fe_id
+    } else {
+      selectedComponent.value = undefined
+      selectedId.value = ''
+    }
   }
 
   const addComponent = (data: ComponentInfo) => {
@@ -36,7 +45,7 @@ export const useEditorStore = defineStore('editorStore', () => {
     } else {
       componentList.value.push(newComponent)
     }
-    selectedId.value = newComponent.fe_id
+    setCurrentSelect(newComponent)
   }
 
   return {
@@ -45,6 +54,7 @@ export const useEditorStore = defineStore('editorStore', () => {
     addComponent,
 
     selectedId,
-    setSelectedId,
+    selectedComponent,
+    setCurrentSelect,
   }
 })

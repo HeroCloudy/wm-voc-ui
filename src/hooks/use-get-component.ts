@@ -1,11 +1,13 @@
-import { type ComponentInfo, useEditorStore } from '@/stores/modules/editor.ts'
+import { useEditorStore } from '@/stores/modules/editor.ts'
 
-export function useGetComponentList() {
+export function useGetComponent() {
   const editorStore = useEditorStore()
 
-  const componentList = computed<ComponentInfo[]>(() => editorStore.componentList)
+  const { componentList, selectedId, selectedComponent } = storeToRefs(editorStore)
 
   return {
     componentList,
+    selectedId,
+    selectedComponent,
   }
 }

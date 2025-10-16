@@ -14,5 +14,7 @@ export const componentGroup = [
   },
 ]
 
-export const getComponent = (type: string) =>
-  componentInfoList.find((item) => item.type === type)?.component ?? null
+export const getComponentConfig = (type: string) =>
+  componentInfoList.find((item) => item.type === type)
+
+export const getComponent = (type: string) => getComponentConfig(type)?.component ?? null

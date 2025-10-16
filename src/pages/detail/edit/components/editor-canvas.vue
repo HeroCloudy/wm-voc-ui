@@ -10,7 +10,7 @@
       v-for="item in innerComponentList"
       :key="item.fe_id"
       :class="['component-wrapper', selectedId === item.fe_id ? 'selected' : '']"
-      @click.stop="onItemClick(item.fe_id)"
+      @click.stop="onItemClick(item)"
     >
       <div class="component">
         <component :is="item.c" v-bind="item.props" />
@@ -20,13 +20,13 @@
 </template>
 
 <script setup lang="ts">
-import { useGetComponentList } from '@/hooks/use-get-component-list.ts'
-import { useEditorStore } from '@/stores/modules/editor.ts'
+import { useGetComponent } from '@/hooks/use-get-component.ts'
+import { type ComponentInfo, useEditorStore } from '@/stores/modules/editor.ts'
 import { getComponent } from '@/constants/component-config.ts'
 
 const editorStore = useEditorStore()
 
-const { componentList } = useGetComponentList()
+const { componentList } = useGetComponent()
 const selectedId = computed(() => editorStore.selectedId)
 
 const innerComponentList = computed(() =>
@@ -38,8 +38,8 @@ const innerComponentList = computed(() =>
     .filter((item) => !!item.c),
 )
 
-const onItemClick = (id: string) => {
-  editorStore.setSelectedId(id)
+const onItemClick = (info: ComponentInfo) => {
+  editorStore.setCurrentSelect(info)
 }
 </script>
 <style scoped lang="scss">

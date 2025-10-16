@@ -19,17 +19,18 @@
 
 <script setup lang="ts">
 import { componentGroup } from '@/constants/component-config.ts'
-import type { ComponentExportType } from '@/components/types.ts'
+import type { ComponentConfig } from '@/components/types.ts'
 import { type ComponentInfo, useEditorStore } from '@/stores/modules/editor.ts'
 
 const editorStore = useEditorStore()
 
-const onItemClick = (item: ComponentExportType) => {
-  const { title, type } = item
+const onItemClick = (item: ComponentConfig) => {
+  const { title, type, defaultProps } = item
   const newComponent: ComponentInfo = {
     fe_id: `${new Date().getTime()}`,
     title,
     type,
+    props: defaultProps,
   }
   editorStore.addComponent(newComponent)
 }

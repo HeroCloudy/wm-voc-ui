@@ -11,13 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import type { VocTitlePropsType } from '@/components/types.ts'
+import { defaultProps, type VocTitlePropsType } from './config.ts'
 
-const props = withDefaults(defineProps<VocTitlePropsType>(), {
-  text: '一行标题',
-  level: 1,
-  isCenter: false,
-})
+const props = withDefaults(defineProps<VocTitlePropsType>(), defaultProps)
 
 const innerStyle = computed<Record<string, any>>(() => {
   const style: Record<string, any> = {}

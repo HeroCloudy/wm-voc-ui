@@ -14,12 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import type { VocInputPropsType } from '@/components/types.ts'
+import { defaultProps, type VocInputPropsType } from './config'
 
-withDefaults(defineProps<VocInputPropsType>(), {
-  title: '输入框标题',
-  placeholder: '请输入...',
-})
+withDefaults(defineProps<VocInputPropsType>(), defaultProps)
 </script>
 <style scoped lang="scss">
 .voc-input {
