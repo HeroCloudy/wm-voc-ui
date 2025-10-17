@@ -7,7 +7,7 @@ function getComponentList() {
     // Info
     {
       fe_id: 'c1', // 注意，由于统计页，左侧和中间需要数据完全一直，所以要写死 fe_id ，不能用 Random.id()
-      type: 'questionInfo', // 组件类型，不能重复，前后端统一好
+      type: 'info', // 组件类型，不能重复，前后端统一好
       title: '问卷信息',
       isHidden: false,
       isLocked: false,
@@ -52,7 +52,7 @@ function getComponentList() {
     // Paragraph
     {
       fe_id: 'c6',
-      type: 'questionParagraph',
+      type: 'paragraph',
       title: '段落',
       isHidden: false,
       isLocked: false,

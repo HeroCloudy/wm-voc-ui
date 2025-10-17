@@ -20,15 +20,9 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/[...404]': RouteRecordInfo<'/[...404]', '/:404(.*)', { 404: ParamValue<true> }, { 404: ParamValue<false> }>,
-    '/detail': RouteRecordInfo<'/detail', '/detail', Record<never, never>, Record<never, never>, '/detail/edit' | '/detail/edit/[:id]' | '/detail/edit/components/component-lib' | '/detail/edit/components/component-prop' | '/detail/edit/components/editor-header' | '/detail/edit/components/editor-toolbar' | '/detail/edit/components/left-panel' | '/detail/edit/components/right-panel' | '/detail/stat' | '/detail/stat/[:id]'>,
-    '/detail/edit': RouteRecordInfo<'/detail/edit', '/detail/edit', Record<never, never>, Record<never, never>, '/detail/edit/[:id]' | '/detail/edit/components/component-lib' | '/detail/edit/components/component-prop' | '/detail/edit/components/editor-header' | '/detail/edit/components/editor-toolbar' | '/detail/edit/components/left-panel' | '/detail/edit/components/right-panel'>,
+    '/detail': RouteRecordInfo<'/detail', '/detail', Record<never, never>, Record<never, never>, '/detail/edit' | '/detail/edit/[:id]' | '/detail/stat' | '/detail/stat/[:id]'>,
+    '/detail/edit': RouteRecordInfo<'/detail/edit', '/detail/edit', Record<never, never>, Record<never, never>, '/detail/edit/[:id]'>,
     '/detail/edit/[:id]': RouteRecordInfo<'/detail/edit/[:id]', '/detail/edit/::id', { :id: ParamValue<true> }, { :id: ParamValue<false> }>,
-    '/detail/edit/components/component-lib': RouteRecordInfo<'/detail/edit/components/component-lib', '/detail/edit/components/component-lib', Record<never, never>, Record<never, never>>,
-    '/detail/edit/components/component-prop': RouteRecordInfo<'/detail/edit/components/component-prop', '/detail/edit/components/component-prop', Record<never, never>, Record<never, never>>,
-    '/detail/edit/components/editor-header': RouteRecordInfo<'/detail/edit/components/editor-header', '/detail/edit/components/editor-header', Record<never, never>, Record<never, never>>,
-    '/detail/edit/components/editor-toolbar': RouteRecordInfo<'/detail/edit/components/editor-toolbar', '/detail/edit/components/editor-toolbar', Record<never, never>, Record<never, never>>,
-    '/detail/edit/components/left-panel': RouteRecordInfo<'/detail/edit/components/left-panel', '/detail/edit/components/left-panel', Record<never, never>, Record<never, never>>,
-    '/detail/edit/components/right-panel': RouteRecordInfo<'/detail/edit/components/right-panel', '/detail/edit/components/right-panel', Record<never, never>, Record<never, never>>,
     '/detail/stat': RouteRecordInfo<'/detail/stat', '/detail/stat', Record<never, never>, Record<never, never>, '/detail/stat/[:id]'>,
     '/detail/stat/[:id]': RouteRecordInfo<'/detail/stat/[:id]', '/detail/stat/::id', { :id: ParamValue<true> }, { :id: ParamValue<false> }>,
     '/login': RouteRecordInfo<'/login', '/login', Record<never, never>, Record<never, never>>,
@@ -59,39 +53,15 @@ declare module 'vue-router/auto-routes' {
       views: never
     }
     'src/pages/detail.vue': {
-      routes: '/detail' | '/detail/edit/[:id]' | '/detail/stat/[:id]' | '/detail/edit/components/component-lib' | '/detail/edit/components/component-prop' | '/detail/edit/components' | '/detail/edit' | '/detail/edit/components/editor-header' | '/detail/edit/components/editor-toolbar' | '/detail/edit/components/left-panel' | '/detail/edit/components/right-panel' | '/detail/stat'
+      routes: '/detail' | '/detail/edit/[:id]' | '/detail/stat/[:id]' | '/detail/edit' | '/detail/stat'
       views: 'default'
     }
     'src/pages/detail/edit.vue': {
-      routes: '/detail/edit' | '/detail/edit/[:id]' | '/detail/edit/components/component-lib' | '/detail/edit/components/component-prop' | '/detail/edit/components' | '/detail/edit/components/editor-header' | '/detail/edit/components/editor-toolbar' | '/detail/edit/components/left-panel' | '/detail/edit/components/right-panel'
+      routes: '/detail/edit' | '/detail/edit/[:id]'
       views: 'default'
     }
     'src/pages/detail/edit/[:id].vue': {
       routes: '/detail/edit/[:id]'
-      views: never
-    }
-    'src/pages/detail/edit/components/component-lib.vue': {
-      routes: '/detail/edit/components/component-lib'
-      views: never
-    }
-    'src/pages/detail/edit/components/component-prop.vue': {
-      routes: '/detail/edit/components/component-prop'
-      views: never
-    }
-    'src/pages/detail/edit/components/editor-header.vue': {
-      routes: '/detail/edit/components/editor-header'
-      views: never
-    }
-    'src/pages/detail/edit/components/editor-toolbar.vue': {
-      routes: '/detail/edit/components/editor-toolbar'
-      views: never
-    }
-    'src/pages/detail/edit/components/left-panel.vue': {
-      routes: '/detail/edit/components/left-panel'
-      views: never
-    }
-    'src/pages/detail/edit/components/right-panel.vue': {
-      routes: '/detail/edit/components/right-panel'
       views: never
     }
     'src/pages/detail/stat.vue': {

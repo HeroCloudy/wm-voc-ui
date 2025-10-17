@@ -1,12 +1,13 @@
 import { WmVocTitleInfo } from '@/components/wm/voc/title/index.ts'
 import { WmVocInputInfo } from '@/components/wm/voc/input/index.ts'
+import { WmVocParagraphInfo } from '@/components/wm/voc/paragraph/index.ts'
 
-export const componentInfoList = [WmVocTitleInfo, WmVocInputInfo]
+export const componentInfoList = [WmVocTitleInfo, WmVocInputInfo, WmVocParagraphInfo]
 
 export const componentGroup = [
   {
     groupName: '文本显示',
-    components: [WmVocTitleInfo],
+    components: [WmVocTitleInfo, WmVocParagraphInfo],
   },
   {
     groupName: '用户输入',
