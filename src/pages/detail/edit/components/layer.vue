@@ -7,7 +7,10 @@
 <template>
   <el-scrollbar height="100%">
     <div v-for="item in componentList" :key="item.fe_id" class="item">
-      <div class="wrapper" @click.stop="onItemClick(item)">
+      <div
+        :class="['wrapper', item.isHidden ? 'pointer-events-none' : '']"
+        @click.stop="onItemClick(item)"
+      >
         <div class="flex-1">
           <el-input
             v-if="changingTitleId === item.fe_id"
@@ -19,16 +22,36 @@
           <span
             v-else
             @click.stop="onTitleClick(item)"
-            :class="[selectedId === item.fe_id ? 'text-blue font-bold' : '', 'pr-2']"
-            >{{ item.title }}</span
+            :class="[
+              'text-gray-700',
+              selectedId === item.fe_id ? 'text-blue! font-bold' : '',
+              'pr-2',
+              item.isHidden ? 'text-gray-400!' : '',
+            ]"
           >
+            {{ item.title || '&nbsp;&nbsp;' }}
+          </span>
         </div>
         <div>
-          <el-button text>
+          <el-button
+            :size="item.isHidden ? 'small' : 'default'"
+            class="pointer-events-auto!"
+            @click.stop="editorStore.updateComponentHidden(item.fe_id, !item.isHidden)"
+            :type="item.isHidden ? 'primary' : 'default'"
+            :circle="item.isHidden"
+            :text="!item.isHidden"
+          >
             <wm-icon icon="ant-design:eye-invisible-outlined" />
           </el-button>
 
-          <el-button text>
+          <el-button
+            :size="item.isLocked ? 'small' : 'default'"
+            class="pointer-events-auto!"
+            @click.stop="editorStore.toggleComponentLock(item.fe_id)"
+            :type="item.isLocked ? 'primary' : 'default'"
+            :circle="item.isLocked"
+            :text="!item.isLocked"
+          >
             <wm-icon icon="ant-design:lock-outlined" />
           </el-button>
         </div>
