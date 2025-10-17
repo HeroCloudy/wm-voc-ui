@@ -2,8 +2,14 @@ import type { Component } from 'vue'
 import type { VocInputPropsType } from './wm/voc/input/config.ts'
 import type { VocTitlePropsType } from './wm/voc/title/config.ts'
 import type { VocParagraphPropsType } from './wm/voc/paragraph/config.ts'
+import type { VocInfoPropsType } from '@/components/wm/voc/info/config.ts'
+import type { VocTextareaPropsType } from '@/components/wm/voc/textarea/config.ts'
 
-export type VocComponentPropsType = VocTitlePropsType & VocInputPropsType & VocParagraphPropsType
+export type VocComponentPropsType = VocTitlePropsType &
+  VocInputPropsType &
+  VocParagraphPropsType &
+  VocInfoPropsType &
+  VocTextareaPropsType
 
 /**
  * 每个组件需要导出的配置信息的结构定义

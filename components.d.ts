@@ -37,6 +37,8 @@ declare module 'vue' {
     WmVocInputPropForm: typeof import('./src/components/wm/voc/input/prop-form.vue')['default']
     WmVocParagraph: typeof import('./src/components/wm/voc/paragraph/index.vue')['default']
     WmVocParagraphPropForm: typeof import('./src/components/wm/voc/paragraph/prop-form.vue')['default']
+    WmVocTextarea: typeof import('./src/components/wm/voc/textarea/index.vue')['default']
+    WmVocTextareaPropForm: typeof import('./src/components/wm/voc/textarea/prop-form.vue')['default']
     WmVocTitle: typeof import('./src/components/wm/voc/title/index.vue')['default']
     WmVocTitlePropForm: typeof import('./src/components/wm/voc/title/prop-form.vue')['default']
   }
