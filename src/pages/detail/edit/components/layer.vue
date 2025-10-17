@@ -7,9 +7,21 @@
 <template>
   <el-scrollbar height="100%">
     <div v-for="item in componentList" :key="item.fe_id" class="item">
-      <div class="wrapper" @click="onItemClick(item)">
+      <div class="wrapper" @click.stop="onItemClick(item)">
         <div class="flex-1">
-          <span @click="onTitleClick(item)">{{ item.title }}</span>
+          <el-input
+            v-if="changingTitleId === item.fe_id"
+            v-model="item.title"
+            @keyup.enter.prevent="onModifyTitle(item)"
+            @blur="onModifyTitle(item)"
+            autofocus
+          />
+          <span
+            v-else
+            @click.stop="onTitleClick(item)"
+            :class="[selectedId === item.fe_id ? 'text-blue font-bold' : '', 'pr-2']"
+            >{{ item.title }}</span
+          >
         </div>
         <div>
           <el-button text>
@@ -30,7 +42,9 @@ import { useGetComponent } from '@/hooks/use-get-component.ts'
 import { type ComponentInfo, useEditorStore } from '@/stores/modules/editor.ts'
 
 const editorStore = useEditorStore()
-const { componentList } = useGetComponent()
+const { componentList, selectedId } = useGetComponent()
+
+const changingTitleId = ref<string>('')
 
 const checkHidden = (item: ComponentInfo) => {
   if (item.isHidden) {
@@ -44,6 +58,7 @@ const onTitleClick = (item: ComponentInfo) => {
   if (!checkHidden(item)) {
     return
   }
+  changingTitleId.value = item.fe_id
 }
 
 const onItemClick = (item: ComponentInfo) => {
@@ -51,6 +66,11 @@ const onItemClick = (item: ComponentInfo) => {
     return
   }
   editorStore.setCurrentSelect(item)
+}
+
+const onModifyTitle = (item: ComponentInfo) => {
+  changingTitleId.value = ''
+  console.log(item)
 }
 </script>
 <style scoped lang="scss">
