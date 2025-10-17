@@ -6,6 +6,62 @@
 -->
 <template>
   <el-scrollbar height="100%">
+    <draggable v-model="componentList" @start="drag = true" @end="drag = false" item-key="fe_id">
+      <template #item="{ element: item }">
+        <div class="item">
+          <div
+            :class="['wrapper', item.isHidden ? 'pointer-events-none' : '']"
+            @click.stop="onItemClick(item)"
+          >
+            <div class="flex-1">
+              <el-input
+                v-if="changingTitleId === item.fe_id"
+                v-model="item.title"
+                @keyup.enter.prevent="onModifyTitle(item)"
+                @blur="onModifyTitle(item)"
+                autofocus
+              />
+              <span
+                v-else
+                @click.stop="onTitleClick(item)"
+                :class="[
+                  'text-gray-700',
+                  selectedId === item.fe_id ? 'text-blue! font-bold' : '',
+                  'pr-2',
+                  item.isHidden ? 'text-gray-400!' : '',
+                ]"
+              >
+                {{ item.title || '&nbsp;&nbsp;' }}
+              </span>
+            </div>
+            <div>
+              <el-button
+                :size="item.isHidden ? 'small' : 'default'"
+                class="pointer-events-auto!"
+                @click.stop="editorStore.updateComponentHidden(item.fe_id, !item.isHidden)"
+                :type="item.isHidden ? 'primary' : 'default'"
+                :circle="item.isHidden"
+                :text="!item.isHidden"
+              >
+                <wm-icon icon="ant-design:eye-invisible-outlined" />
+              </el-button>
+
+              <el-button
+                :size="item.isLocked ? 'small' : 'default'"
+                class="pointer-events-auto!"
+                @click.stop="editorStore.toggleComponentLock(item.fe_id)"
+                :type="item.isLocked ? 'primary' : 'default'"
+                :circle="item.isLocked"
+                :text="!item.isLocked"
+              >
+                <wm-icon icon="ant-design:lock-outlined" />
+              </el-button>
+            </div>
+          </div>
+        </div>
+      </template>
+    </draggable>
+    <!--
     <div v-for="item in componentList" :key="item.fe_id" class="item">
       <div
         :class="['wrapper', item.isHidden ? 'pointer-events-none' : '']"
@@ -57,12 +113,16 @@
         </div>
       </div>
     </div>
+    -->
   </el-scrollbar>
 </template>
 
 <script setup lang="ts">
 import { useGetComponent } from '@/hooks/use-get-component.ts'
 import { type ComponentInfo, useEditorStore } from '@/stores/modules/editor.ts'
+import draggable from 'vuedraggable'
+
+const drag = ref(false)
 
 const editorStore = useEditorStore()
 const { componentList, selectedId } = useGetComponent()
@@ -98,7 +158,7 @@ const onModifyTitle = (item: ComponentInfo) => {
 </script>
 <style scoped lang="scss">
 .item {
-  @apply py-2;
+  @apply py-2 bg-white px-2;
   border-bottom: 1px solid var(--border-color);
 
   .wrapper {
