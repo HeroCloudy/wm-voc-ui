@@ -7,7 +7,7 @@
 <template>
   <div class="voc-radio">
     <div class="title">{{ title }}</div>
-    <el-radio-group :value="value">
+    <el-radio-group :model-value="value">
       <el-space :direction="isVertical ? 'vertical' : 'horizontal'" alignment="stretch">
         <el-radio v-for="item in options" :key="item" :value="item" :label="item" />
       </el-space>
