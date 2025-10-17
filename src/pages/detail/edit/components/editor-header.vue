@@ -13,7 +13,17 @@
           返回
         </el-button>
 
-        <div class="title">问卷标题</div>
+        <div class="title" v-if="pageInfo">
+          <div class="flex items-center" v-if="!isEditingTitle">
+            <span>{{ pageInfo?.title }}</span>
+            <el-button text class="ml-2" @click="isEditingTitle = true">
+              <wm-icon icon="ep:edit" class="font-bold text-xl" />
+            </el-button>
+          </div>
+          <div v-else>
+            <el-input v-model="pageInfo.title" @keyup.enter.prevent="isEditingTitle = false" />
+          </div>
+        </div>
       </div>
 
       <div class="main">
@@ -30,8 +40,12 @@
 
 <script setup lang="ts">
 import EditorToolbar from '@/pages/detail/edit/components/editor-toolbar.vue'
+import { useGetPageInfo } from '@/hooks/use-get-page-info.ts'
 
 const router = useRouter()
+
+const { pageInfo } = useGetPageInfo()
+const isEditingTitle = ref(false)
 </script>
 <style scoped lang="scss">
 .editor-header {

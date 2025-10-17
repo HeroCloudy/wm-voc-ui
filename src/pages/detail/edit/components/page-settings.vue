@@ -6,7 +6,7 @@
 -->
 <template>
   <el-scrollbar height="100%">
-    <el-form :model="pageInfo" label-position="top" v-if="pageInfo">
+    <el-form :model="pageInfo" label-position="top" v-if="pageInfo" @submit.prevent>
       <el-form-item label="问卷标题" prop="title" :rules="[RULES.R('标题不能为空')]">
         <el-input v-model="pageInfo.title" />
       </el-form-item>
@@ -24,10 +24,9 @@
 </template>
 
 <script setup lang="ts">
-import { useVocStore } from '@/stores/modules/voc.ts'
 import { RULES } from '@/constants/rules.ts'
+import { useGetPageInfo } from '@/hooks/use-get-page-info.ts'
 
-const vocStore = useVocStore()
-const { pageInfo } = storeToRefs(vocStore)
+const { pageInfo } = useGetPageInfo()
 </script>
 <style scoped lang="scss"></style>
