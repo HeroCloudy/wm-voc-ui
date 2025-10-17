@@ -4,6 +4,7 @@ import { WmVocParagraphInfo } from '@/components/wm/voc/paragraph/index.ts'
 import { WmVocInfoInfo } from '@/components/wm/voc/info/index.ts'
 import { WmVocTextareaInfo } from '@/components/wm/voc/textarea/index.ts'
 import { WmVocRadioInfo } from '@/components/wm/voc/radio/index.ts'
+import { WmVocCheckboxInfo } from '@/components/wm/voc/checkbox/index.ts'
 
 export const componentInfoList = [
   WmVocTitleInfo,
@@ -12,6 +13,7 @@ export const componentInfoList = [
   WmVocInfoInfo,
   WmVocTextareaInfo,
   WmVocRadioInfo,
+  WmVocCheckboxInfo,
 ]
 
 export const componentGroup = [
@@ -21,7 +23,7 @@ export const componentGroup = [
   },
   {
     groupName: '用户输入',
-    components: [WmVocInputInfo, WmVocTextareaInfo, WmVocRadioInfo],
+    components: [WmVocInputInfo, WmVocTextareaInfo, WmVocRadioInfo, WmVocCheckboxInfo],
   },
 ]
 

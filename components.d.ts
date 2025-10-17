@@ -9,6 +9,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
+    ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElFooter: typeof import('element-plus/es')['ElFooter']
@@ -34,6 +36,8 @@ declare module 'vue' {
     WmLogo: typeof import('./src/components/wm/logo/index.vue')['default']
     WmOptionEdit: typeof import('./src/components/wm/option-edit/index.vue')['default']
     WmUserInfo: typeof import('./src/components/wm/user-info/index.vue')['default']
+    WmVocCheckbox: typeof import('./src/components/wm/voc/checkbox/index.vue')['default']
+    WmVocCheckboxPropForm: typeof import('./src/components/wm/voc/checkbox/prop-form.vue')['default']
     WmVocInfo: typeof import('./src/components/wm/voc/info/index.vue')['default']
     WmVocInfoPropForm: typeof import('./src/components/wm/voc/info/prop-form.vue')['default']
     WmVocInput: typeof import('./src/components/wm/voc/input/index.vue')['default']

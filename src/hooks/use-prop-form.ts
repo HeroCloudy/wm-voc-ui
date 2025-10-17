@@ -1,6 +1,4 @@
-import type { VocComponentPropsType } from '@/components/types.ts'
-
-export function usePropForm(props: VocComponentPropsType, emits: any) {
+export function usePropForm(props: any, emits: any) {
   const form = ref({ ...props })
 
   watch(
