@@ -20,9 +20,10 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/[...404]': RouteRecordInfo<'/[...404]', '/:404(.*)', { 404: ParamValue<true> }, { 404: ParamValue<false> }>,
-    '/detail': RouteRecordInfo<'/detail', '/detail', Record<never, never>, Record<never, never>, '/detail/edit' | '/detail/edit/[:id]' | '/detail/stat' | '/detail/stat/[:id]'>,
-    '/detail/edit': RouteRecordInfo<'/detail/edit', '/detail/edit', Record<never, never>, Record<never, never>, '/detail/edit/[:id]'>,
+    '/detail': RouteRecordInfo<'/detail', '/detail', Record<never, never>, Record<never, never>, '/detail/edit' | '/detail/edit/[:id]' | '/detail/edit/components/layer' | '/detail/stat' | '/detail/stat/[:id]'>,
+    '/detail/edit': RouteRecordInfo<'/detail/edit', '/detail/edit', Record<never, never>, Record<never, never>, '/detail/edit/[:id]' | '/detail/edit/components/layer'>,
     '/detail/edit/[:id]': RouteRecordInfo<'/detail/edit/[:id]', '/detail/edit/::id', { :id: ParamValue<true> }, { :id: ParamValue<false> }>,
+    '/detail/edit/components/layer': RouteRecordInfo<'/detail/edit/components/layer', '/detail/edit/components/layer', Record<never, never>, Record<never, never>>,
     '/detail/stat': RouteRecordInfo<'/detail/stat', '/detail/stat', Record<never, never>, Record<never, never>, '/detail/stat/[:id]'>,
     '/detail/stat/[:id]': RouteRecordInfo<'/detail/stat/[:id]', '/detail/stat/::id', { :id: ParamValue<true> }, { :id: ParamValue<false> }>,
     '/login': RouteRecordInfo<'/login', '/login', Record<never, never>, Record<never, never>>,
@@ -53,15 +54,19 @@ declare module 'vue-router/auto-routes' {
       views: never
     }
     'src/pages/detail.vue': {
-      routes: '/detail' | '/detail/edit/[:id]' | '/detail/stat/[:id]' | '/detail/edit' | '/detail/stat'
+      routes: '/detail' | '/detail/edit/[:id]' | '/detail/stat/[:id]' | '/detail/edit/components' | '/detail/edit' | '/detail/edit/components/layer' | '/detail/stat'
       views: 'default'
     }
     'src/pages/detail/edit.vue': {
-      routes: '/detail/edit' | '/detail/edit/[:id]'
+      routes: '/detail/edit' | '/detail/edit/[:id]' | '/detail/edit/components' | '/detail/edit/components/layer'
       views: 'default'
     }
     'src/pages/detail/edit/[:id].vue': {
       routes: '/detail/edit/[:id]'
+      views: never
+    }
+    'src/pages/detail/edit/components/layer.vue': {
+      routes: '/detail/edit/components/layer'
       views: never
     }
     'src/pages/detail/stat.vue': {

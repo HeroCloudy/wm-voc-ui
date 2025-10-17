@@ -23,17 +23,25 @@
           <span>图层</span>
         </div>
       </template>
-      <div>图层 Content</div>
+      <layer />
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script setup lang="ts">
 import ComponentLib from './component-lib.vue'
+import Layer from './layer.vue'
 
 const activeTab = ref('componentLib')
 </script>
 <style scoped lang="scss">
-.left-panel {
+.el-tabs {
+  @apply h-full overflow-hidden;
+
+  :deep(.el-tabs__content) {
+    .el-tab-pane {
+      @apply h-full overflow-hidden;
+    }
+  }
 }
 </style>

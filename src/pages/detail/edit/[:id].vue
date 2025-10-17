@@ -45,13 +45,13 @@ const onPageClick = () => {
 </script>
 <style scoped lang="scss">
 .edit-page {
-  @apply flex flex-col h-screen bg-[#f0f2f5];
+  @apply flex flex-col h-screen bg-[#f0f2f5] overflow-hidden;
 
   .wrapper {
-    @apply flex-1 flex py-3 mx-6;
+    @apply flex-1 flex py-3 mx-6 overflow-hidden;
 
     .left {
-      @apply w-300px bg-white px-3 box-border;
+      @apply w-300px bg-white px-3 box-border h-full overflow-hidden;
     }
 
     .right {

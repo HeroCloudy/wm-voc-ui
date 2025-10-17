@@ -6,7 +6,6 @@
 -->
 <template>
   <el-form :model="form" label-position="top">
-    {{ form }}
     <el-form-item label="标题内容" prop="text" :rules="[RULES.R('请输入标题内容')]">
       <el-input v-model="form.text" clearable />
     </el-form-item>

@@ -5,7 +5,7 @@
  @time: 2025/10/15 22:01
 -->
 <template>
-  <div class="component-lib">
+  <el-scrollbar height="100%">
     <div v-for="(item, index) in componentGroup" :key="index" class="mb-4">
       <div class="title">{{ item.groupName }}</div>
       <div v-for="(c, i) in item.components" :key="i" class="wrapper" @click="onItemClick(c)">
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </el-scrollbar>
 </template>
 
 <script setup lang="ts">
@@ -36,18 +36,16 @@ const onItemClick = (item: ComponentConfig) => {
 }
 </script>
 <style scoped lang="scss">
-.component-lib {
-  .title {
-    @apply font-bold my-2;
-  }
+.title {
+  @apply font-bold my-2;
+}
 
-  .wrapper {
-    @apply mb-3 bg-white cursor-pointer px-4 py-2;
-    border-radius: 3px;
+.wrapper {
+  @apply mb-3 cursor-pointer px-4 py-1 bg-[var(--bg-color)];
+  border-radius: 3px;
 
-    &:hover {
-      @apply bg-gray-1;
-    }
+  &:hover {
+    @apply bg-gray-1;
   }
 }
 </style>

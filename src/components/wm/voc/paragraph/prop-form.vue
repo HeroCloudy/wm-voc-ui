@@ -6,7 +6,6 @@
 -->
 <template>
   <el-form :model="form" label-position="top">
-    {{ form }}
     <el-form-item label="段落内容" prop="text" :rules="[RULES.R('请输入段落内容')]">
       <el-input
         type="textarea"

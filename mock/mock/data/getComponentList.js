@@ -43,7 +43,7 @@ function getComponentList() {
     // Textarea
     {
       fe_id: 'c5',
-      type: 'questionTextarea',
+      type: 'textarea',
       title: '多行输入',
       isHidden: false,
       isLocked: false,
@@ -61,18 +61,14 @@ function getComponentList() {
     // Radio
     {
       fe_id: 'c7',
-      type: 'questionRadio',
+      type: 'radio',
       title: '单选',
       isHidden: false,
       isLocked: false,
       props: {
         title: '单选标题',
         isVertical: false,
-        options: [
-          { value: 'item1', text: '选项1' },
-          { value: 'item2', text: '选项2' },
-          { value: 'item3', text: '选项3' },
-        ],
+        options: ['选项1', '选项2', '选项3'],
         value: '',
       },
     },
