@@ -5,21 +5,65 @@
  @time: 2025/10/17 16:02
 -->
 <template>
-  <!--  <div class="layer">-->
   <el-scrollbar height="100%">
-    <div>图层 Content</div>
-    <div v-for="i in 300" :key="i">TEST {{ i }}</div>
+    <div v-for="item in componentList" :key="item.fe_id" class="item">
+      <div class="wrapper" @click="onItemClick(item)">
+        <div class="flex-1">
+          <span @click="onTitleClick(item)">{{ item.title }}</span>
+        </div>
+        <div>
+          <el-button text>
+            <wm-icon icon="ant-design:eye-invisible-outlined" />
+          </el-button>
+
+          <el-button text>
+            <wm-icon icon="ant-design:lock-outlined" />
+          </el-button>
+        </div>
+      </div>
+    </div>
   </el-scrollbar>
-  <!--  </div>-->
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  p?: string
-}>()
+import { useGetComponent } from '@/hooks/use-get-component.ts'
+import { type ComponentInfo, useEditorStore } from '@/stores/modules/editor.ts'
+
+const editorStore = useEditorStore()
+const { componentList } = useGetComponent()
+
+const checkHidden = (item: ComponentInfo) => {
+  if (item.isHidden) {
+    ElMessage.warning('隐藏的组件不能被选中')
+    return false
+  }
+  return true
+}
+
+const onTitleClick = (item: ComponentInfo) => {
+  if (!checkHidden(item)) {
+    return
+  }
+}
+
+const onItemClick = (item: ComponentInfo) => {
+  if (!checkHidden(item)) {
+    return
+  }
+  editorStore.setCurrentSelect(item)
+}
 </script>
 <style scoped lang="scss">
-.layer {
-  @apply overflow-hidden h-full;
+.item {
+  @apply py-2;
+  border-bottom: 1px solid var(--border-color);
+
+  .wrapper {
+    @apply flex items-center cursor-pointer;
+
+    .el-button {
+      @apply px-1;
+    }
+  }
 }
 </style>
