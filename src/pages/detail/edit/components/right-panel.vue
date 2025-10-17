@@ -33,4 +33,14 @@ import ComponentProp from '@/pages/detail/edit/components/component-prop.vue'
 
 const activeTab = ref('prop')
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.el-tabs {
+  @apply h-full overflow-hidden;
+
+  :deep(.el-tabs__content) {
+    .el-tab-pane {
+      @apply h-full overflow-hidden;
+    }
+  }
+}
+</style>

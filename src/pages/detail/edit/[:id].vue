@@ -51,7 +51,7 @@ const onPageClick = () => {
     @apply flex-1 flex py-3 mx-6 overflow-hidden;
 
     .left {
-      @apply w-300px bg-white px-3 box-border h-full overflow-hidden;
+      @apply w-300px bg-white px-3 box-border;
     }
 
     .right {

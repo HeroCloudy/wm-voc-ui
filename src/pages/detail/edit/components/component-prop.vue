@@ -5,15 +5,17 @@
  @time: 2025/10/16 10:35
 -->
 <template>
-  <div class="component-prop" v-if="selectedComponent">
-    <component
-      :is="config?.propComponent"
-      v-bind="selectedComponent.props"
-      @change="onChange"
-      :disabled="selectedComponent.isLocked || selectedComponent.isHidden"
-    />
-  </div>
-  <div v-else>未选中任何组件</div>
+  <el-scrollbar height="100%">
+    <div class="component-prop" v-if="selectedComponent">
+      <component
+        :is="config?.propComponent"
+        v-bind="selectedComponent.props"
+        @change="onChange"
+        :disabled="selectedComponent.isLocked || selectedComponent.isHidden"
+      />
+    </div>
+    <div v-else>未选中任何组件</div>
+  </el-scrollbar>
 </template>
 
 <script setup lang="ts">
