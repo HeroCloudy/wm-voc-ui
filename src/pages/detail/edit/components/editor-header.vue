@@ -46,6 +46,7 @@ import { useGetPageInfo } from '@/hooks/use-get-page-info.ts'
 import { useRequest } from '@/hooks/use-request.ts'
 import { updateSurveyService } from '@/service/survey.ts'
 import { useGetComponent } from '@/hooks/use-get-component.ts'
+import { useMagicKeys } from '@vueuse/core'
 
 const router = useRouter()
 const route = useRoute()
@@ -100,6 +101,27 @@ const onSaveBtnClick = async () => {
   await onSave()
   ElMessage.success('问卷保存成功')
 }
+
+const keys: any = useMagicKeys({
+  passive: false,
+  onEventFired(e) {
+    if (e.metaKey && e.key === 's' && e.type === 'keydown') {
+      e.preventDefault()
+    }
+  },
+})
+whenever(keys['meta_s'], () => {
+  onSaveBtnClick()
+})
+
+// 自动保存
+watchDebounced(
+  [pageInfo, componentList],
+  () => {
+    onSave()
+  },
+  { debounce: 3000, maxWait: 5000, deep: true },
+)
 </script>
 <style scoped lang="scss">
 .editor-header {
