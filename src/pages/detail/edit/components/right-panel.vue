@@ -23,14 +23,15 @@
           <span>页面设置</span>
         </div>
       </template>
-      <div>页面设置 Content</div>
+      <page-settings />
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script setup lang="ts">
-import ComponentProp from '@/pages/detail/edit/components/component-prop.vue'
+import ComponentProp from './component-prop.vue'
 import { useGetComponent } from '@/hooks/use-get-component.ts'
+import PageSettings from './page-settings.vue'
 
 const KEY_PROP = 'prop'
 const KEY_SETTING = 'setting'
