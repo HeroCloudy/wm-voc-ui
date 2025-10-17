@@ -52,6 +52,18 @@
         <wm-icon icon="ant-design:block-outlined" />
       </el-button>
     </el-tooltip>
+
+    <el-tooltip content="撤销" placement="bottom" effect="light">
+      <el-button circle @click="editorStore.undo()">
+        <wm-icon icon="fad:undo" />
+      </el-button>
+    </el-tooltip>
+
+    <el-tooltip content="重做" placement="bottom" effect="light">
+      <el-button circle @click="editorStore.redo()">
+        <wm-icon icon="fad:redo" />
+      </el-button>
+    </el-tooltip>
   </div>
 </template>
 
