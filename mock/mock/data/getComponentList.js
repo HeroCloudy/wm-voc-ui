@@ -11,7 +11,7 @@ function getComponentList() {
       title: '问卷信息',
       isHidden: false,
       isLocked: false,
-      props: { title: '问卷标题', desc: '问卷描述...' },
+      props: { title: '问卷标题', description: '问卷描述...' },
     },
     // Title
     {

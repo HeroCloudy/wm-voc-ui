@@ -31,6 +31,8 @@ declare module 'vue' {
     WmIcon: typeof import('./src/components/wm/icon/index.vue')['default']
     WmLogo: typeof import('./src/components/wm/logo/index.vue')['default']
     WmUserInfo: typeof import('./src/components/wm/user-info/index.vue')['default']
+    WmVocInfo: typeof import('./src/components/wm/voc/info/index.vue')['default']
+    WmVocInfoPropForm: typeof import('./src/components/wm/voc/info/prop-form.vue')['default']
     WmVocInput: typeof import('./src/components/wm/voc/input/index.vue')['default']
     WmVocInputPropForm: typeof import('./src/components/wm/voc/input/prop-form.vue')['default']
     WmVocParagraph: typeof import('./src/components/wm/voc/paragraph/index.vue')['default']
