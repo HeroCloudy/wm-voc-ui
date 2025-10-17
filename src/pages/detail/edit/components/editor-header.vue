@@ -31,8 +31,10 @@
       </div>
 
       <div class="right">
-        <el-button>保存</el-button>
-        <el-button type="primary">发布</el-button>
+        <el-button :loading="saveLoading" @click="onSaveBtnClick"> 保存 </el-button>
+        <el-button type="primary" :loading="publishLoading" @click="onPublishBtnClick">
+          发布
+        </el-button>
       </div>
     </div>
   </div>
@@ -41,11 +43,63 @@
 <script setup lang="ts">
 import EditorToolbar from '@/pages/detail/edit/components/editor-toolbar.vue'
 import { useGetPageInfo } from '@/hooks/use-get-page-info.ts'
+import { useRequest } from '@/hooks/use-request.ts'
+import { updateSurveyService } from '@/service/survey.ts'
+import { useGetComponent } from '@/hooks/use-get-component.ts'
 
 const router = useRouter()
+const route = useRoute()
 
 const { pageInfo } = useGetPageInfo()
+const { componentList } = useGetComponent()
 const isEditingTitle = ref(false)
+const id = computed(() => route.params.id)
+
+const { loading: saveLoading, run: onSave } = useRequest(
+  () => {
+    if (!id.value) {
+      ElMessage.error('系统出错')
+      router.replace('/')
+      return
+    }
+    const params = {
+      ...pageInfo.value,
+      componentList: componentList.value,
+    }
+    return updateSurveyService(id.value, params)
+  },
+  {
+    manual: true,
+  },
+)
+
+const { loading: publishLoading, run: onPublishBtnClick } = useRequest(
+  async () => {
+    if (!id.value) {
+      ElMessage.error('系统出错')
+      router.replace('/')
+      return
+    }
+    const params = {
+      ...pageInfo.value,
+      componentList: componentList.value,
+      isPublished: true,
+    }
+    return updateSurveyService(id.value, params)
+  },
+  {
+    manual: true,
+    onSuccess() {
+      ElMessage.success('问卷发布成功')
+      router.replace(`/detail/stat/${id.value}`)
+    },
+  },
+)
+
+const onSaveBtnClick = async () => {
+  await onSave()
+  ElMessage.success('问卷保存成功')
+}
 </script>
 <style scoped lang="scss">
 .editor-header {
