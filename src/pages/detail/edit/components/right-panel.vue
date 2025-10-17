@@ -6,7 +6,7 @@
 -->
 <template>
   <el-tabs stretch v-model="activeTab">
-    <el-tab-pane name="prop">
+    <el-tab-pane :name="KEY_PROP">
       <template #label>
         <div class="flex items-center text-sm">
           <wm-icon icon="ant-design:file-text-outlined" class="mr-2" />
@@ -16,7 +16,7 @@
       <component-prop />
     </el-tab-pane>
 
-    <el-tab-pane name="setting">
+    <el-tab-pane :name="KEY_SETTING">
       <template #label>
         <div class="flex items-center text-sm">
           <wm-icon icon="ant-design:setting-outlined" class="mr-2" />
@@ -30,8 +30,17 @@
 
 <script setup lang="ts">
 import ComponentProp from '@/pages/detail/edit/components/component-prop.vue'
+import { useGetComponent } from '@/hooks/use-get-component.ts'
 
-const activeTab = ref('prop')
+const KEY_PROP = 'prop'
+const KEY_SETTING = 'setting'
+
+const activeTab = ref('')
+
+const { selectedId } = useGetComponent()
+watchEffect(() => {
+  activeTab.value = selectedId.value ? KEY_PROP : KEY_SETTING
+})
 </script>
 <style scoped lang="scss">
 .el-tabs {
