@@ -32,7 +32,7 @@
 import ComponentLib from './component-lib.vue'
 import Layer from './layer.vue'
 
-const activeTab = ref('layer')
+const activeTab = ref('componentLib')
 </script>
 <style scoped lang="scss">
 .el-tabs {
