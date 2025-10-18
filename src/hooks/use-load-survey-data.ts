@@ -16,9 +16,16 @@ export function useLoadSurveyData() {
   const { loading, data, error } = useRequest(() => getSurveyService(id), {
     onSuccess: (data: any) => {
       if (data) {
-        const { componentList = [], title = '', desc = '', js = '', css = '' } = data
+        const {
+          componentList = [],
+          title = '',
+          desc = '',
+          js = '',
+          css = '',
+          isPublished = false,
+        } = data
         editorStore.setComponentList(componentList)
-        vocStore.setPageInfo({ title, desc, js, css })
+        vocStore.setPageInfo({ title, desc, js, css, isPublished })
       }
     },
   })

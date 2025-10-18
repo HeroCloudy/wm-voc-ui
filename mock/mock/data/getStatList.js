@@ -23,16 +23,16 @@ export default function getStatList(len = 10) {
       const { fe_id, type, props } = c
 
       switch (type) {
-        case 'questionInput':
+        case 'input':
           stat[fe_id] = Random.ctitle()
           break
-        case 'questionTextarea':
+        case 'textarea':
           stat[fe_id] = Random.ctitle()
           break
-        case 'questionRadio':
+        case 'radio':
           stat[fe_id] = props.options[0].text
           break
-        case 'questionCheckbox':
+        case 'checkbox':
           stat[fe_id] = `${props.list[0].text},${props.list[1].text}`
           break
       }

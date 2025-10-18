@@ -3,6 +3,7 @@ export interface PageInfo {
   desc?: string
   js?: string
   css?: string
+  isPublished?: boolean
 }
 
 export const useVocStore = defineStore('vocStore', () => {

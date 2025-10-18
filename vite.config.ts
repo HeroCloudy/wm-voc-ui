@@ -57,6 +57,7 @@ export default defineConfig((configEnv: ConfigEnv) => {
       },
     },
     server: {
+      port: 5173,
       proxy: {
         [env.VITE_BASE_URL]: {
           target: env.VITE_BASE_URL_RMOTE,
