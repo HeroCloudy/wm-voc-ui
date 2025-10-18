@@ -5,11 +5,11 @@
 -->
 <template>
   <div class="stat-page">
-    <stat-header />
+    <stat-header :total="total" />
 
     <div class="wrapper">
       <div class="left">
-        <left-component-list @selected="onSelected" />
+        <left-component-list :selected-component="selectedComponent" @selected="onSelected" />
       </div>
 
       <div class="main" v-loading="loading">
@@ -23,9 +23,13 @@
             </template>
           </el-result>
         </div>
-        <div v-else class="h-full overflow-hidden bg-red">
-          {{ selectedComponent }}
-        </div>
+
+        <stat-table
+          v-else
+          :selected-component="selectedComponent"
+          @update-total="(v) => (total = v)"
+          @selected="onSelected"
+        />
       </div>
 
       <div class="right">Right</div>
@@ -40,6 +44,7 @@ import { useGetPageInfo } from '@/hooks/use-get-page-info.ts'
 import StatHeader from './components/stat-header.vue'
 import LeftComponentList from '@/pages/detail/stat/components/left-component-list.vue'
 import type { ComponentInfo } from '@/stores/modules/editor.ts'
+import StatTable from '@/pages/detail/stat/components/stat-table.vue'
 
 const { loading } = useLoadSurveyData()
 const { pageInfo } = useGetPageInfo()
@@ -50,6 +55,8 @@ const selectedComponent = ref<ComponentInfo>()
 const onSelected = (val: ComponentInfo) => {
   selectedComponent.value = val
 }
+
+const total = ref(0)
 </script>
 <style scoped lang="scss">
 .stat-page {

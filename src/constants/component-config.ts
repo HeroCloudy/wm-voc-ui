@@ -5,7 +5,6 @@ import { WmVocInfoInfo } from '@/components/wm/voc/info/index.ts'
 import { WmVocTextareaInfo } from '@/components/wm/voc/textarea/index.ts'
 import { WmVocRadioInfo } from '@/components/wm/voc/radio/index.ts'
 import { WmVocCheckboxInfo } from '@/components/wm/voc/checkbox/index.ts'
-import type { ComponentInfo } from '@/stores/modules/editor.ts'
 
 export const componentInfoList = [
   WmVocTitleInfo,

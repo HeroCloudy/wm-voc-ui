@@ -12,7 +12,7 @@
         :key="item.fe_id"
         :class="[
           'component-wrapper',
-          selectedComponent?.fe_id === item.fe_id ? 'selected' : '',
+          innerSelectedComponent?.fe_id === item.fe_id ? 'selected' : '',
           isUserInputComponent(item.type) ? 'cursor-pointer' : 'cursor-not-allowed',
         ]"
         @click="onItemClick(item)"
@@ -30,12 +30,16 @@ import { useGetComponent } from '@/hooks/use-get-component.ts'
 import { getComponent, isUserInputComponent } from '@/constants/component-config.ts'
 import type { ComponentInfo } from '@/stores/modules/editor.ts'
 
+const props = defineProps<{
+  selectedComponent?: ComponentInfo
+}>()
+
 const emits = defineEmits<{
   selected: [value: ComponentInfo]
 }>()
 
 const { componentList } = useGetComponent()
-const selectedComponent = ref<ComponentInfo>()
+const innerSelectedComponent = ref<ComponentInfo | undefined>(props.selectedComponent)
 
 const innerComponentList = computed(() =>
   componentList.value
@@ -50,9 +54,19 @@ const onItemClick = (item: ComponentInfo) => {
   if (!isUserInputComponent(item.type)) {
     return
   }
-  selectedComponent.value = item
-  emits('selected', selectedComponent.value)
+  innerSelectedComponent.value = item
+  emits('selected', innerSelectedComponent.value)
 }
+
+watch(
+  () => props.selectedComponent,
+  () => {
+    innerSelectedComponent.value = props.selectedComponent
+  },
+  {
+    deep: true,
+  },
+)
 </script>
 <style scoped lang="scss">
 .component-list {
@@ -74,6 +88,7 @@ const onItemClick = (item: ComponentInfo) => {
 
     &.selected {
       border-color: var(--wm-color-primary) !important;
+      background-color: var(--wm-color-primary-light-9) !important;
     }
   }
 }

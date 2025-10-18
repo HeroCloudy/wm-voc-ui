@@ -14,6 +14,8 @@
         </el-button>
         <div class="title">
           <span>{{ pageInfo?.title }}</span>
+
+          <span class="ml-5 font-400 text-lg">答卷总数：{{ total }}</span>
         </div>
       </div>
 
@@ -55,6 +57,10 @@
 import { useGetPageInfo } from '@/hooks/use-get-page-info.ts'
 import type { InputInstance } from 'element-plus'
 import VueQrcode from 'vue-qrcode'
+
+defineProps<{
+  total: number
+}>()
 
 const router = useRouter()
 const route = useRoute()

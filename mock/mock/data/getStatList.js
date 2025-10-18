@@ -7,7 +7,7 @@ import getComponentList from './getComponentList.js'
 
 const Random = Mock.Random
 
-export default function getStatList(len = 10) {
+export default function getStatList(len = 1000) {
   const componentList = getComponentList()
 
   const res = []
@@ -15,7 +15,7 @@ export default function getStatList(len = 10) {
   for (let i = 0; i < len; i++) {
     // 一个用户的答卷
     const stat = {
-      _id: Random.id(),
+      id: Random.id(),
     }
 
     // 增加各个组件的 id value
@@ -30,10 +30,10 @@ export default function getStatList(len = 10) {
           stat[fe_id] = Random.ctitle()
           break
         case 'radio':
-          stat[fe_id] = props.options[0].text
+          stat[fe_id] = props.options[0]
           break
         case 'checkbox':
-          stat[fe_id] = `${props.list[0].text},${props.list[1].text}`
+          stat[fe_id] = `${props.options[0]},${props.options[1]}`
           break
       }
     })
