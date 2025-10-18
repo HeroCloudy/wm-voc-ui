@@ -4,3 +4,7 @@
 html, body {
   @apply bg-[var(--bg-color)];
 }
+
+.qr-popper {
+  --el-popover-padding: 0 !important;
+}

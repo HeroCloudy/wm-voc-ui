@@ -5,7 +5,7 @@
 -->
 <template>
   <div class="stat-page">
-    <div>Header</div>
+    <stat-header />
 
     <div class="wrapper">
       <div class="left">Left</div>
@@ -31,6 +31,7 @@
 import { useLoadSurveyData } from '@/hooks/use-load-survey-data.ts'
 import img404 from '@/assets/images/404.png'
 import { useGetPageInfo } from '@/hooks/use-get-page-info.ts'
+import StatHeader from './components/stat-header.vue'
 
 const { loading } = useLoadSurveyData()
 const { pageInfo } = useGetPageInfo()
