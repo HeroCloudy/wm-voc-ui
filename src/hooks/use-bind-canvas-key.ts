@@ -71,7 +71,7 @@ export function useBindCanvasKey() {
     }
   })
 
-  whenever(keys['meta_shift_z'], () => {
+  whenever(keys['shift_meta_z'], () => {
     if (!isInputActive()) {
       editorStore.redo()
     }
