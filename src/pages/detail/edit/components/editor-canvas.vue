@@ -6,20 +6,31 @@
 -->
 <template>
   <div class="editor-canvas">
-    <div
-      v-for="item in innerComponentList"
-      :key="item.fe_id"
-      :class="[
-        'component-wrapper',
-        selectedId === item.fe_id ? 'selected' : '',
-        item.isLocked ? 'locked' : '',
-      ]"
-      @click.stop="onItemClick(item)"
+    <draggable
+      v-model="componentList"
+      tag="div"
+      item-key="fe_id"
+      ghost-class="drag-ghost"
+      chosen-class="drag-chosen"
+      animation="300"
     >
-      <div class="component">
-        <component :is="item.c" v-bind="item.props" />
-      </div>
-    </div>
+      <template #item="{ element: item }">
+        <div v-if="!getComponent(item.type)"></div>
+        <div
+          v-else
+          :class="[
+            'component-wrapper',
+            selectedId === item.fe_id ? 'selected' : '',
+            item.isLocked ? 'locked' : '',
+          ]"
+          @click.stop="onItemClick(item)"
+        >
+          <div class="component">
+            <component :is="getComponent(item.type)" v-bind="item.props" />
+          </div>
+        </div>
+      </template>
+    </draggable>
   </div>
 </template>
 
@@ -34,14 +45,14 @@ const editorStore = useEditorStore()
 const { componentList } = useGetComponent()
 const selectedId = computed(() => editorStore.selectedId)
 
-const innerComponentList = computed(() =>
-  componentList.value
-    .map((item) => ({
-      ...item,
-      c: getComponent(item.type),
-    }))
-    .filter((item) => !!item.c && !item.isHidden),
-)
+// const innerComponentList = computed(() =>
+//   componentList.value
+//     .map((item) => ({
+//       ...item,
+//       c: getComponent(item.type),
+//     }))
+//     .filter((item) => !!item.c && !item.isHidden),
+// )
 
 const onItemClick = (info: ComponentInfo) => {
   editorStore.setCurrentSelect(info)

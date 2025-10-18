@@ -1,0 +1,7 @@
+.drag-ghost {
+  opacity: 0.5;
+  border: 1px dashed var(--wm-color-primary-light-7);
+}
+.drag-chosen {
+  background-color: var(--wm-color-primary-light-9) !important;
+}
