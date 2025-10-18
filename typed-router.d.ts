@@ -20,12 +20,13 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/[...404]': RouteRecordInfo<'/[...404]', '/:404(.*)', { 404: ParamValue<true> }, { 404: ParamValue<false> }>,
-    '/detail': RouteRecordInfo<'/detail', '/detail', Record<never, never>, Record<never, never>, '/detail/edit' | '/detail/edit/[:id]' | '/detail/stat' | '/detail/stat/[:id]' | '/detail/stat/components/left-component-list' | '/detail/stat/components/stat-header' | '/detail/stat/components/stat-table'>,
+    '/detail': RouteRecordInfo<'/detail', '/detail', Record<never, never>, Record<never, never>, '/detail/edit' | '/detail/edit/[:id]' | '/detail/stat' | '/detail/stat/[:id]' | '/detail/stat/components/left-component-list' | '/detail/stat/components/stat-chart' | '/detail/stat/components/stat-header' | '/detail/stat/components/stat-table'>,
     '/detail/edit': RouteRecordInfo<'/detail/edit', '/detail/edit', Record<never, never>, Record<never, never>, '/detail/edit/[:id]'>,
     '/detail/edit/[:id]': RouteRecordInfo<'/detail/edit/[:id]', '/detail/edit/::id', { :id: ParamValue<true> }, { :id: ParamValue<false> }>,
-    '/detail/stat': RouteRecordInfo<'/detail/stat', '/detail/stat', Record<never, never>, Record<never, never>, '/detail/stat/[:id]' | '/detail/stat/components/left-component-list' | '/detail/stat/components/stat-header' | '/detail/stat/components/stat-table'>,
+    '/detail/stat': RouteRecordInfo<'/detail/stat', '/detail/stat', Record<never, never>, Record<never, never>, '/detail/stat/[:id]' | '/detail/stat/components/left-component-list' | '/detail/stat/components/stat-chart' | '/detail/stat/components/stat-header' | '/detail/stat/components/stat-table'>,
     '/detail/stat/[:id]': RouteRecordInfo<'/detail/stat/[:id]', '/detail/stat/::id', { :id: ParamValue<true> }, { :id: ParamValue<false> }>,
     '/detail/stat/components/left-component-list': RouteRecordInfo<'/detail/stat/components/left-component-list', '/detail/stat/components/left-component-list', Record<never, never>, Record<never, never>>,
+    '/detail/stat/components/stat-chart': RouteRecordInfo<'/detail/stat/components/stat-chart', '/detail/stat/components/stat-chart', Record<never, never>, Record<never, never>>,
     '/detail/stat/components/stat-header': RouteRecordInfo<'/detail/stat/components/stat-header', '/detail/stat/components/stat-header', Record<never, never>, Record<never, never>>,
     '/detail/stat/components/stat-table': RouteRecordInfo<'/detail/stat/components/stat-table', '/detail/stat/components/stat-table', Record<never, never>, Record<never, never>>,
     '/login': RouteRecordInfo<'/login', '/login', Record<never, never>, Record<never, never>>,
@@ -56,7 +57,7 @@ declare module 'vue-router/auto-routes' {
       views: never
     }
     'src/pages/detail.vue': {
-      routes: '/detail' | '/detail/edit/[:id]' | '/detail/stat/[:id]' | '/detail/stat/components' | '/detail/edit' | '/detail/stat/components/left-component-list' | '/detail/stat' | '/detail/stat/components/stat-header' | '/detail/stat/components/stat-table'
+      routes: '/detail' | '/detail/edit/[:id]' | '/detail/stat/[:id]' | '/detail/stat/components' | '/detail/edit' | '/detail/stat/components/left-component-list' | '/detail/stat' | '/detail/stat/components/stat-chart' | '/detail/stat/components/stat-header' | '/detail/stat/components/stat-table'
       views: 'default'
     }
     'src/pages/detail/edit.vue': {
@@ -68,7 +69,7 @@ declare module 'vue-router/auto-routes' {
       views: never
     }
     'src/pages/detail/stat.vue': {
-      routes: '/detail/stat' | '/detail/stat/[:id]' | '/detail/stat/components' | '/detail/stat/components/left-component-list' | '/detail/stat/components/stat-header' | '/detail/stat/components/stat-table'
+      routes: '/detail/stat' | '/detail/stat/[:id]' | '/detail/stat/components' | '/detail/stat/components/left-component-list' | '/detail/stat/components/stat-chart' | '/detail/stat/components/stat-header' | '/detail/stat/components/stat-table'
       views: 'default'
     }
     'src/pages/detail/stat/[:id].vue': {
@@ -77,6 +78,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/detail/stat/components/left-component-list.vue': {
       routes: '/detail/stat/components/left-component-list'
+      views: never
+    }
+    'src/pages/detail/stat/components/stat-chart.vue': {
+      routes: '/detail/stat/components/stat-chart'
       views: never
     }
     'src/pages/detail/stat/components/stat-header.vue': {

@@ -32,7 +32,9 @@
         />
       </div>
 
-      <div class="right">Right</div>
+      <div class="right">
+        <stat-chart :selected-component="selectedComponent" />
+      </div>
     </div>
   </div>
 </template>
@@ -45,6 +47,7 @@ import StatHeader from './components/stat-header.vue'
 import LeftComponentList from '@/pages/detail/stat/components/left-component-list.vue'
 import type { ComponentInfo } from '@/stores/modules/editor.ts'
 import StatTable from '@/pages/detail/stat/components/stat-table.vue'
+import StatChart from '@/pages/detail/stat/components/stat-chart.vue'
 
 const { loading } = useLoadSurveyData()
 const { pageInfo } = useGetPageInfo()
