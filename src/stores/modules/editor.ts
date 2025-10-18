@@ -134,6 +134,28 @@ export const useEditorStore = defineStore('editorStore', () => {
     selectedId.value = componentList.value[index + 1]!.fe_id
   }
 
+  const moveSelectComponentUp = () => {
+    const index = getSelectedIndex()
+    if (index <= 0) {
+      return
+    }
+    const target = componentList.value.splice(index, 1)
+    if (target) {
+      componentList.value.splice(index - 1, 0, ...target)
+    }
+  }
+
+  const moveSelectComponentDown = () => {
+    const index = getSelectedIndex()
+    if (index >= componentList.value.length - 1) {
+      return
+    }
+    const target = componentList.value.splice(index, 1)
+    if (target) {
+      componentList.value.splice(index + 1, 0, ...target)
+    }
+  }
+
   return {
     componentList,
     setComponentList,
@@ -144,9 +166,13 @@ export const useEditorStore = defineStore('editorStore', () => {
     toggleComponentLock,
     copySelectedComponent,
 
+    moveSelectComponentUp,
+    moveSelectComponentDown,
+
     selectedId,
     selectedComponent,
     setCurrentSelect,
+    getSelectedIndex,
 
     copiedComponent,
     pasteComponent,

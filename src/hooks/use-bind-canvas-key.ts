@@ -65,6 +65,18 @@ export function useBindCanvasKey() {
     }
   })
 
+  whenever(keys['meta_z'], () => {
+    if (!isInputActive()) {
+      editorStore.undo()
+    }
+  })
+
+  whenever(keys['meta_shift_z'], () => {
+    if (!isInputActive()) {
+      editorStore.redo()
+    }
+  })
+
   whenever(keys['meta_r'], () => {
     window.location.reload()
   })

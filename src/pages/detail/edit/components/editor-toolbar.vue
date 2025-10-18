@@ -53,6 +53,22 @@
       </el-button>
     </el-tooltip>
 
+    <el-tooltip content="上移" placement="bottom" effect="light">
+      <el-button circle @click="editorStore.moveSelectComponentUp()" :disabled="isTopBtnDisabled">
+        <wm-icon icon="ep:top" />
+      </el-button>
+    </el-tooltip>
+
+    <el-tooltip content="下移" placement="bottom" effect="light">
+      <el-button
+        circle
+        @click="editorStore.moveSelectComponentDown()"
+        :disabled="isBottomBtnDisabled"
+      >
+        <wm-icon icon="ep:bottom" />
+      </el-button>
+    </el-tooltip>
+
     <el-tooltip content="撤销" placement="bottom" effect="light">
       <el-button circle @click="editorStore.undo()">
         <wm-icon icon="fad:undo" />
@@ -72,6 +88,20 @@ import { useEditorStore } from '@/stores/modules/editor.ts'
 import { useGetComponent } from '@/hooks/use-get-component.ts'
 
 const editorStore = useEditorStore()
-const { selectedId, selectedComponent } = useGetComponent()
+const { selectedId, selectedComponent, componentList } = useGetComponent()
+
+const isTopBtnDisabled = computed(() => {
+  return editorStore.getSelectedIndex() <= 0
+})
+
+const isBottomBtnDisabled = computed(() => {
+  return editorStore.getSelectedIndex() >= componentList.value.length - 1
+})
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.el-button.is-disabled {
+  .icon {
+    color: #ddd;
+  }
+}
+</style>
